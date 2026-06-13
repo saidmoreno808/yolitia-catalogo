@@ -1,0 +1,74 @@
+name: Release catalogo yolitia
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag de la release (ej. v2026.06.13)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determinar tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            TAG="${{ github.ref_name }}"
+          else
+            TAG="${{ inputs.tag }}"
+            git tag -f "$TAG" HEAD
+            git push origin "$TAG" --force
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install qrcode[pil] reportlab pillow pyzbar
+
+      - name: Preparar logo
+        if: hashFiles('assets/images/logo.png') == ''
+        run: |
+          python scripts/prepare_logo.py
+
+      - name: Verificar dist/catalogo-yolitia.pdf
+        id: check
+        run: |
+          if [ ! -f dist/catalogo-yolitia.pdf ]; then
+            echo "Falta dist/catalogo-yolitia.pdf."
+            echo "Sube el PDF como artefacto del workflow o usa 'gh release upload'."
+            exit 1
+          fi
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+
+      - name: Subir asset a release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            --title "Catálogo YOLITIA ${{ steps.tag.outputs.tag }}" \
+            --notes "Catálogo en PDF. URL estable: https://catalogo.yolitia.bio" \
+            --repo "$GITHUB_REPOSITORY" \
+            dist/catalogo-yolitia.pdf \
+            || gh release upload "${{ steps.tag.outputs.tag }}" dist/catalogo-yolitia.pdf --repo "$GITHUB_REPOSITORY" --clobber
+
+      - name: Disparar redeploy
+        run: |
+          git commit --allow-empty -m "trigger: release ${{ steps.tag.outputs.tag }}"
+          git push origin main

@@ -1,0 +1,4 @@
+# GitHub Pages: redirección a la descarga directa
+# Esto permite que el subdominio (catalogo.yolitia.bio) baje el PDF
+# incluso si alguien llega a la raíz del subpath /download.
+/catalogo-yolitia.pdf  /catalogo-yolitia.pdf  302

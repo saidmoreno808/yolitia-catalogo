@@ -1,0 +1,36 @@
+# =============================================================================
+# YOLITIA Catalog — Git ignore
+# =============================================================================
+
+# Artefactos de catálogo (regenerables con scripts/build_catalog_v*.py)
+output/
+
+# Imágenes de productos descargadas
+assets/images/productos/
+
+# Catálogo PDF (se publica como GitHub Release, no en el repo)
+dist/
+public/catalogo-yolitia.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Datos de scraping (privados)
+data/scraping_*.json
+data/download_*.json
