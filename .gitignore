@@ -12,6 +12,18 @@ assets/images/productos/
 dist/
 public/catalogo-yolitia.pdf
 
+# Base de datos y exports privados
+data/yolitia.db
+data/*.xlsx
+data/*_import.*
+data/yolitia_medusa_import.json
+data/yolitia_prestashop_import.csv
+data/yolitia_woocommerce_import.csv
+data/yolitia_products_database.json
+data/yolitia_products_database.xlsx
+data/scraping_*.json
+data/download_*.json
+
 # Python
 __pycache__/
 *.py[cod]
@@ -30,7 +42,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Datos de scraping (privados)
-data/scraping_*.json
-data/download_*.json
