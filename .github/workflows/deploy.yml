@@ -31,33 +31,22 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Descargar PDF desde la última release
-        id: pdf
-        uses: actions/download-artifact@v4
-        with:
-          name: catalogo-pdf
-          path: public/
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-        continue-on-error: true
-
-      - name: Fallback: descargar PDF desde la última release (gh CLI)
-        if: steps.pdf.outcome != 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          URL=$(gh release view --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[] | select(.name=="catalogo-yolitia.pdf") | .url')
-          if [ -n "$URL" ]; then
-            gh release download --repo "$GITHUB_REPOSITORY" --pattern 'catalogo-yolitia.pdf' --dir public/
+          mkdir -p public
+          if gh release download v1 --repo "$GITHUB_REPOSITORY" --pattern 'catalogo-yolitia.pdf' --dir public/ 2>/dev/null; then
+            echo "PDF descargado desde la release v1"
           else
-            echo "No hay release con catalogo-yolitia.pdf. El sitio funcionará sin PDF."
+            echo "No se encontro release v1; se sirve sin PDF"
           fi
 
-      - name: Upload artifact
+      - name: Subir artefacto Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: "public"
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy a GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
