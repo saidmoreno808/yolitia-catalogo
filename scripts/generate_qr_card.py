@@ -356,20 +356,21 @@ def _draw_link_icon(draw: ImageDraw.ImageDraw, cx: float, cy: float, size: int, 
 
 
 def _draw_leaf_icon(draw: ImageDraw.ImageDraw, cx: float, cy: float, size: int, color) -> None:
-    """Mini icono de hoja (PLA biodegradable): forma de gota/hoja."""
+    """Hoja simple: forma de gota/limon estilizada con nervadura."""
     s = size
-    # Gota/hoja apuntando arriba
+    # Hoja como poligono suave (forma de limon)
     pts = [
-        (cx, cy - s),
-        (cx + s * 0.7, cy - s * 0.1),
-        (cx + s * 0.4, cy + s * 0.7),
-        (cx, cy + s * 0.85),
-        (cx - s * 0.4, cy + s * 0.7),
-        (cx - s * 0.7, cy - s * 0.1),
+        (cx, cy - s),                      # punta
+        (cx + s * 0.65, cy - s * 0.3),
+        (cx + s * 0.55, cy + s * 0.4),
+        (cx, cy + s * 0.55),               # base
+        (cx - s * 0.55, cy + s * 0.4),
+        (cx - s * 0.65, cy - s * 0.3),
     ]
     draw.polygon(pts, fill=color)
     # Nervadura central
-    draw.line([(cx, cy - s * 0.85), (cx, cy + s * 0.7)], fill=COLOR_MARFIL, width=1)
+    draw.line([(cx, cy - s * 0.85), (cx, cy + s * 0.45)],
+              fill=COLOR_MARFIL, width=max(1, int(s * 0.12)))
 
 
 def _draw_star_icon(draw: ImageDraw.ImageDraw, cx: float, cy: float, size: int, color) -> None:
@@ -384,25 +385,25 @@ def _draw_star_icon(draw: ImageDraw.ImageDraw, cx: float, cy: float, size: int, 
 
 
 def _draw_corner_fleuron(draw: ImageDraw.ImageDraw, x: float, y: float, angle_deg: float, color, size: int) -> None:
-    """Pequeño ornamento en forma de pétalo/corazón en las esquinas."""
+    """Pequeño ornamento en forma de flor de 4 petalos simetricos."""
     s = size
     rad = math.radians(angle_deg)
 
     def rot(px: float, py: float) -> tuple[float, float]:
         return (x + px * math.cos(rad) - py * math.sin(rad), y + px * math.sin(rad) + py * math.cos(rad))
 
-    # Tres pétalos formando un trebol pequeño
-    petals = [
-        [(0, 0), (s * 0.7, -s * 0.2), (s * 0.55, s * 0.4)],
-        [(0, 0), (-s * 0.2, -s * 0.7), (s * 0.4, -s * 0.55)],
-        [(0, 0), (-s * 0.7, s * 0.2), (-s * 0.4, s * 0.55)],
-    ]
-    for p in petals:
-        pts = [rot(*pt) for pt in p]
-        draw.polygon(pts, fill=color)
-    # Centro
+    # 4 petalos pequenos alrededor del centro
+    r_out = s * 0.7
+    r_in = s * 0.18
+    for ang_offset in [0, 90, 180, 270]:
+        ang = math.radians(ang_offset)
+        tip = rot(math.cos(ang) * r_out, math.sin(ang) * r_out)
+        side1 = rot(math.cos(ang + math.pi / 2) * r_in, math.sin(ang + math.pi / 2) * r_in)
+        side2 = rot(math.cos(ang - math.pi / 2) * r_in, math.sin(ang - math.pi / 2) * r_in)
+        draw.polygon([side1, tip, side2], fill=color)
+    # Centro (circulo mas oscuro)
     c = rot(0, 0)
-    draw.ellipse([c[0] - s * 0.12, c[1] - s * 0.12, c[0] + s * 0.12, c[1] + s * 0.12], fill=color)
+    draw.ellipse([c[0] - s * 0.15, c[1] - s * 0.15, c[0] + s * 0.15, c[1] + s * 0.15], fill=color)
 
 
 def register_fonts() -> tuple[str, str, str]:

@@ -1,0 +1,2546 @@
+{
+  "metadata": {
+    "marca": "Yolitia",
+    "version": "1.0",
+    "fecha_creacion": "2026-06-18T02:01:47.962702",
+    "total_paginas": 72,
+    "total_productos_catalogados": 134
+  },
+  "identidad_visual": {
+    "paleta": {
+      "marfil": "#F8F6F0",
+      "negro_suave": "#1A1A1A",
+      "azul_niebla": "#B8CCE4",
+      "verde_oliva": "#7A8C6E",
+      "gris_piedra": "#D6D0C8",
+      "crema_calido": "#EDE8DF"
+    },
+    "tipografia": {
+      "titulos": "Montserrat ExtraBold",
+      "cuerpo": "Open Sans Light",
+      "numeros": "Courier New Light",
+      "fallback_titulos": "Helvetica-Bold"
+    },
+    "elemento_signature": {
+      "descripcion": "Espiral geometrica organica — representa circularidad + raices mexicanas",
+      "ubicacion": "Portada (fondo), separadores de categoria (marca de agua sutil)",
+      "tecnica": "Vector SVG embebido como reporte en reportlab canvas",
+      "color": "#B8CCE4 al 30% opacidad"
+    },
+    "dimensiones": {
+      "formato": "A4 vertical",
+      "ancho_pt": 595,
+      "alto_pt": 842,
+      "margen_pt": 56.7,
+      "sangrado_pt": 8.5
+    }
+  },
+  "paginas": [
+    {
+      "tipo": "portada",
+      "pagina_numero": null,
+      "numero_pagina_display": null,
+      "elementos": [],
+      "notas": "Portada: Yolitia + subtitulo + espiral signature + degradado marfil->azul"
+    },
+    {
+      "tipo": "indice",
+      "pagina_numero": null,
+      "numero_pagina_display": null,
+      "elementos": [],
+      "categorias": [],
+      "notas": "Indice de categorias con numeros de pagina"
+    },
+    {
+      "tipo": "separador_categoria",
+      "pagina_numero": 1,
+      "numero_pagina_display": "1",
+      "categoria": "Joyería & Accesorios",
+      "orden_categoria": 1,
+      "total_categorias": 5,
+      "elementos": [],
+      "notas": "Media pagina: nombre categoria en grande + franja azul niebla + icono"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 2,
+      "numero_pagina_display": "2",
+      "categoria": "Joyería & Accesorios",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-002",
+          "sku": "YOL-JOY-002",
+          "nombre_yolitia": "Aretes Serpiente de Seda",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-002_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-002/YOL-002_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": true,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 3,
+      "numero_pagina_display": "3",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-003",
+          "sku": "YOL-JOY-003",
+          "nombre_yolitia": "Aretes Nodo Infinito de Amor",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-003_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-003/YOL-003_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-008",
+          "sku": "YOL-JOY-008",
+          "nombre_yolitia": "Joyero Organizador",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-008_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-008/YOL-008_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-009",
+          "sku": "YOL-JOY-009",
+          "nombre_yolitia": "Aretes Hongo del Bosque",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-009_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-009/YOL-009_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-010",
+          "sku": "YOL-JOY-010",
+          "nombre_yolitia": "Aretes Esqueleto de Gato",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-010_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-010/YOL-010_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 4,
+      "numero_pagina_display": "4",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-012",
+          "sku": "YOL-JOY-012",
+          "nombre_yolitia": "Aretes Medusa",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-012_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-012/YOL-012_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-013",
+          "sku": "YOL-JOY-013",
+          "nombre_yolitia": "Aretes Noche de Brujas",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-013_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-013/YOL-013_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-014",
+          "sku": "YOL-JOY-014",
+          "nombre_yolitia": "Aretes Telaraña de Amor",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-014_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-014/YOL-014_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-015",
+          "sku": "YOL-JOY-015",
+          "nombre_yolitia": "Aretes Grito",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-015_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-015/YOL-015_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 5,
+      "numero_pagina_display": "5",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-016",
+          "sku": "YOL-JOY-016",
+          "nombre_yolitia": "Aretes Jason",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-016_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-016/YOL-016_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-017",
+          "sku": "YOL-JOY-017",
+          "nombre_yolitia": "Aretes Medusa Mortal",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-017_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-017/YOL-017_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-018",
+          "sku": "YOL-JOY-018",
+          "nombre_yolitia": "Aretes Barco de Papel",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-018_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-018/YOL-018_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-019",
+          "sku": "YOL-JOY-019",
+          "nombre_yolitia": "Aretes Gatito",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-019_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-019/YOL-019_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 6,
+      "numero_pagina_display": "6",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-020",
+          "sku": "YOL-JOY-020",
+          "nombre_yolitia": "Aretes Árbol de la Vida",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-020_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-020/YOL-020_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-021",
+          "sku": "YOL-JOY-021",
+          "nombre_yolitia": "Aretes Eclipse",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-021_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-021/YOL-021_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-023",
+          "sku": "YOL-JOY-023",
+          "nombre_yolitia": "Aretes Mariposa",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-023_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-023/YOL-023_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-024",
+          "sku": "YOL-JOY-024",
+          "nombre_yolitia": "Aretes Patita",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-024_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-024/YOL-024_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 7,
+      "numero_pagina_display": "7",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-025",
+          "sku": "YOL-JOY-025",
+          "nombre_yolitia": "Aretes Perro Globo",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-025_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-025/YOL-025_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-026",
+          "sku": "YOL-JOY-026",
+          "nombre_yolitia": "Aretes Silueta Gato",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-026_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-026/YOL-026_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-027",
+          "sku": "YOL-JOY-027",
+          "nombre_yolitia": "Aretes Araña Colgante",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-027_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-027/YOL-027_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-028",
+          "sku": "YOL-JOY-028",
+          "nombre_yolitia": "Aretes Luna y Gato",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-028_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-028/YOL-028_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 8,
+      "numero_pagina_display": "8",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-029",
+          "sku": "YOL-JOY-029",
+          "nombre_yolitia": "Aretes Taza de Café",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-029_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-029/YOL-029_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-030",
+          "sku": "YOL-JOY-030",
+          "nombre_yolitia": "Aretes Sol",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-030_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-030/YOL-030_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-031",
+          "sku": "YOL-JOY-031",
+          "nombre_yolitia": "Aretes Corazón Tejido",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-031_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-031/YOL-031_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-032",
+          "sku": "YOL-JOY-032",
+          "nombre_yolitia": "Aretes Mandala Laberinto",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-032_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-032/YOL-032_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 9,
+      "numero_pagina_display": "9",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 4,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-033",
+          "sku": "YOL-JOY-033",
+          "nombre_yolitia": "Aretes Avión de Papel",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-033_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-033/YOL-033_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-034",
+          "sku": "YOL-JOY-034",
+          "nombre_yolitia": "Aretes Flor de Sakura",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-034_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-034/YOL-034_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-035",
+          "sku": "YOL-JOY-035",
+          "nombre_yolitia": "Aretes Gran Ola de Kanagawa",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-035_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-035/YOL-035_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 4,
+          "producto_id": "YOL-104",
+          "sku": "YOL-JOY-104",
+          "nombre_yolitia": "Organizador Joyero Árbol",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-104_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-104/YOL-104_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 4 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 10,
+      "numero_pagina_display": "10",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 3,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-141",
+          "sku": "YOL-JOY-141",
+          "nombre_yolitia": "Kpop Demon Hunters Coloring Panel 2 Craft Diy",
+          "subcategoria": "Anillos",
+          "imagen_filename": "YOL-141_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-141/YOL-141_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-152",
+          "sku": "YOL-JOY-152",
+          "nombre_yolitia": "Soporte Joyero Mano 3D",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-152_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-152/YOL-152_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-156",
+          "sku": "YOL-JOY-156",
+          "nombre_yolitia": "Joyero Ciervo",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-156_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-156/YOL-156_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 2x2: 3 producto(s)"
+    },
+    {
+      "tipo": "separador_categoria",
+      "pagina_numero": 11,
+      "numero_pagina_display": "11",
+      "categoria": "Hogar & Decoración",
+      "orden_categoria": 2,
+      "total_categorias": 5,
+      "elementos": [],
+      "notas": "Media pagina: nombre categoria en grande + franja azul niebla + icono"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 12,
+      "numero_pagina_display": "12",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-006",
+          "sku": "YOL-HOG-006",
+          "nombre_yolitia": "Maceta Arcadia",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-006_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-006/YOL-006_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": true,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 13,
+      "numero_pagina_display": "13",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-007",
+          "sku": "YOL-HOG-007",
+          "nombre_yolitia": "Velo de Pétalos",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-007_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-007/YOL-007_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-040",
+          "sku": "YOL-HOG-040",
+          "nombre_yolitia": "Reloj Espiral de la Vida",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-040_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-040/YOL-040_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 14,
+      "numero_pagina_display": "14",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-041",
+          "sku": "YOL-HOG-041",
+          "nombre_yolitia": "Lámparas Vela para Mesa",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-041_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-041/YOL-041_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-042",
+          "sku": "YOL-HOG-042",
+          "nombre_yolitia": "Fósil de Ammonite",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-042_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-042/YOL-042_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 15,
+      "numero_pagina_display": "15",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-043",
+          "sku": "YOL-HOG-043",
+          "nombre_yolitia": "Fósil de Giganotosaurio",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-043_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-043/YOL-043_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-044",
+          "sku": "YOL-HOG-044",
+          "nombre_yolitia": "Fósil Cráneo de Unicornio",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-044_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-044/YOL-044_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 16,
+      "numero_pagina_display": "16",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-050",
+          "sku": "YOL-HOG-050",
+          "nombre_yolitia": "Lámparas Sistema Solar",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-050_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-050/YOL-050_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-053",
+          "sku": "YOL-HOG-053",
+          "nombre_yolitia": "Reloj de Pared Moderno",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-053_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-053/YOL-053_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 17,
+      "numero_pagina_display": "17",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-054",
+          "sku": "YOL-HOG-054",
+          "nombre_yolitia": "Reloj Porsche",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-054_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-054/YOL-054_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-055",
+          "sku": "YOL-HOG-055",
+          "nombre_yolitia": "Reloj Cubo",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-055_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-055/YOL-055_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 18,
+      "numero_pagina_display": "18",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-056",
+          "sku": "YOL-HOG-056",
+          "nombre_yolitia": "Reloj James Webb",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-056_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-056/YOL-056_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-057",
+          "sku": "YOL-HOG-057",
+          "nombre_yolitia": "Reloj Minimalista Bicolor",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-057_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-057/YOL-057_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 19,
+      "numero_pagina_display": "19",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-058",
+          "sku": "YOL-HOG-058",
+          "nombre_yolitia": "Reloj Dalí de Pared",
+          "subcategoria": "Relojes",
+          "imagen_filename": "YOL-058_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-058/YOL-058_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-068",
+          "sku": "YOL-HOG-068",
+          "nombre_yolitia": "Figuras Unicornio y Llama",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-068_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-068/YOL-068_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 20,
+      "numero_pagina_display": "20",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-080",
+          "sku": "YOL-HOG-080",
+          "nombre_yolitia": "Lámpara Luna",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-080_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-080/YOL-080_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-091",
+          "sku": "YOL-HOG-091",
+          "nombre_yolitia": "Estatua San Valentín",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-091_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-091/YOL-091_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 21,
+      "numero_pagina_display": "21",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-092",
+          "sku": "YOL-HOG-092",
+          "nombre_yolitia": "Estatua Día del Padre",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-092_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-092/YOL-092_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-093",
+          "sku": "YOL-HOG-093",
+          "nombre_yolitia": "Estatua Beso Etéreo",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-093_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-093/YOL-093_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 22,
+      "numero_pagina_display": "22",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-094",
+          "sku": "YOL-HOG-094",
+          "nombre_yolitia": "Estatua Día del Padre",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-094_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-094/YOL-094_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-095",
+          "sku": "YOL-HOG-095",
+          "nombre_yolitia": "Escultura Amor Eterno",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-095_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-095/YOL-095_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 23,
+      "numero_pagina_display": "23",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-098",
+          "sku": "YOL-HOG-098",
+          "nombre_yolitia": "Pantalla Lámpara Escandinava",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-098_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-098/YOL-098_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-107",
+          "sku": "YOL-HOG-107",
+          "nombre_yolitia": "Escultura Oración",
+          "subcategoria": "Figuras Decorativas",
+          "imagen_filename": "YOL-107_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-107/YOL-107_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 24,
+      "numero_pagina_display": "24",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-110",
+          "sku": "YOL-HOG-110",
+          "nombre_yolitia": "Jarrones Toroidales Entrelazados",
+          "subcategoria": "Decoración",
+          "imagen_filename": "YOL-110_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-110/YOL-110_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-113",
+          "sku": "YOL-HOG-113",
+          "nombre_yolitia": "Lámpara Iglú",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-113_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-113/YOL-113_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 25,
+      "numero_pagina_display": "25",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-132",
+          "sku": "YOL-HOG-132",
+          "nombre_yolitia": "Maceta Isabella",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-132_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-132/YOL-132_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-133",
+          "sku": "YOL-HOG-133",
+          "nombre_yolitia": "Maceta Luna con Base",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-133_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-133/YOL-133_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 26,
+      "numero_pagina_display": "26",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-134",
+          "sku": "YOL-HOG-134",
+          "nombre_yolitia": "Maceta de Pared",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-134_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-134/YOL-134_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-135",
+          "sku": "YOL-HOG-135",
+          "nombre_yolitia": "Lámpara Ondulada",
+          "subcategoria": "Iluminación",
+          "imagen_filename": "YOL-135_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-135/YOL-135_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 27,
+      "numero_pagina_display": "27",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-145",
+          "sku": "YOL-HOG-145",
+          "nombre_yolitia": "Maceta Espiral",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-145_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-145/YOL-145_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-146",
+          "sku": "YOL-HOG-146",
+          "nombre_yolitia": "Maceta Irregular",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-146_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-146/YOL-146_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 28,
+      "numero_pagina_display": "28",
+      "categoria": "Hogar & Decoración",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-149",
+          "sku": "YOL-HOG-149",
+          "nombre_yolitia": "Maceta Fósil",
+          "subcategoria": "Macetas",
+          "imagen_filename": "YOL-149_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-149/YOL-149_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-154",
+          "sku": "YOL-HOG-154",
+          "nombre_yolitia": "Soporte Brochas Maquillaje",
+          "subcategoria": "Decoración",
+          "imagen_filename": "YOL-154_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-154/YOL-154_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "separador_categoria",
+      "pagina_numero": 29,
+      "numero_pagina_display": "29",
+      "categoria": "Organización",
+      "orden_categoria": 3,
+      "total_categorias": 5,
+      "elementos": [],
+      "notas": "Media pagina: nombre categoria en grande + franja azul niebla + icono"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 30,
+      "numero_pagina_display": "30",
+      "categoria": "Organización",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-046",
+          "sku": "YOL-ORG-046",
+          "nombre_yolitia": "Soporte Cepillos Moonwalk",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-046_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-046/YOL-046_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": true,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 31,
+      "numero_pagina_display": "31",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-075",
+          "sku": "YOL-ORG-075",
+          "nombre_yolitia": "Organizador de Escritorio",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-075_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-075/YOL-075_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-076",
+          "sku": "YOL-ORG-076",
+          "nombre_yolitia": "Soporte Teléfono Recaro",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-076_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-076/YOL-076_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 32,
+      "numero_pagina_display": "32",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-082",
+          "sku": "YOL-ORG-082",
+          "nombre_yolitia": "Organizador de Pared",
+          "subcategoria": "Organizadores",
+          "imagen_filename": "YOL-082_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-082/YOL-082_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-083",
+          "sku": "YOL-ORG-083",
+          "nombre_yolitia": "Porta Incienso Voyager",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-083_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-083/YOL-083_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 33,
+      "numero_pagina_display": "33",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-084",
+          "sku": "YOL-ORG-084",
+          "nombre_yolitia": "Organizador de Entrada",
+          "subcategoria": "Organizadores",
+          "imagen_filename": "YOL-084_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-084/YOL-084_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-085",
+          "sku": "YOL-ORG-085",
+          "nombre_yolitia": "Organizador de Entrada",
+          "subcategoria": "Organizadores",
+          "imagen_filename": "YOL-085_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-085/YOL-085_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 34,
+      "numero_pagina_display": "34",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-099",
+          "sku": "YOL-ORG-099",
+          "nombre_yolitia": "Porta Tazas Paramétrico",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-099_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-099/YOL-099_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-108",
+          "sku": "YOL-ORG-108",
+          "nombre_yolitia": "Porta Vino Vinograce",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-108_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-108/YOL-108_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 35,
+      "numero_pagina_display": "35",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-126",
+          "sku": "YOL-ORG-126",
+          "nombre_yolitia": "Porta Púas Line 6",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-126_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-126/YOL-126_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-127",
+          "sku": "YOL-ORG-127",
+          "nombre_yolitia": "Porta Púas Ibanez",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-127_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-127/YOL-127_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 36,
+      "numero_pagina_display": "36",
+      "categoria": "Organización",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-128",
+          "sku": "YOL-ORG-128",
+          "nombre_yolitia": "Porta Púas Gibson",
+          "subcategoria": "Porta-Objetos",
+          "imagen_filename": "YOL-128_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-128/YOL-128_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-139",
+          "sku": "YOL-ORG-139",
+          "nombre_yolitia": "Rompecabezas Números",
+          "subcategoria": "Organizadores",
+          "imagen_filename": "YOL-139_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-139/YOL-139_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 37,
+      "numero_pagina_display": "37",
+      "categoria": "Organización",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-153",
+          "sku": "YOL-ORG-153",
+          "nombre_yolitia": "Organizador Brochas con Moño",
+          "subcategoria": "Organizadores",
+          "imagen_filename": "YOL-153_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-153/YOL-153_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "separador_categoria",
+      "pagina_numero": 38,
+      "numero_pagina_display": "38",
+      "categoria": "Entretenimiento",
+      "orden_categoria": 4,
+      "total_categorias": 5,
+      "elementos": [],
+      "notas": "Media pagina: nombre categoria en grande + franja azul niebla + icono"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 39,
+      "numero_pagina_display": "39",
+      "categoria": "Entretenimiento",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-004",
+          "sku": "YOL-ENT-004",
+          "nombre_yolitia": "Pulsador Zen",
+          "subcategoria": "Fidgets",
+          "imagen_filename": "YOL-004_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-004/YOL-004_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": true,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 40,
+      "numero_pagina_display": "40",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 3,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-005",
+          "sku": "YOL-ENT-005",
+          "nombre_yolitia": "Llavero Estrella Mortal",
+          "subcategoria": "Fidgets",
+          "imagen_filename": "YOL-005_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-005/YOL-005_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-036",
+          "sku": "YOL-ENT-036",
+          "nombre_yolitia": "Interruptor Fidget",
+          "subcategoria": "Fidgets",
+          "imagen_filename": "YOL-036_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-036/YOL-036_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-039",
+          "sku": "YOL-ENT-039",
+          "nombre_yolitia": "Llavero Guante de Béisbol",
+          "subcategoria": "Juguetes",
+          "imagen_filename": "YOL-039_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-039/YOL-039_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x3: 3 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 41,
+      "numero_pagina_display": "41",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 3,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-047",
+          "sku": "YOL-ENT-047",
+          "nombre_yolitia": "Pulsador Star Wars",
+          "subcategoria": "Fidgets",
+          "imagen_filename": "YOL-047_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-047/YOL-047_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-065",
+          "sku": "YOL-ENT-065",
+          "nombre_yolitia": "Fidget Swoosh",
+          "subcategoria": "Fidgets",
+          "imagen_filename": "YOL-065_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-065/YOL-065_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-097",
+          "sku": "YOL-ENT-097",
+          "nombre_yolitia": "Rompecabezas ABC Elasmosaurio",
+          "subcategoria": "Rompecabezas",
+          "imagen_filename": "YOL-097_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-097/YOL-097_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x3: 3 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 42,
+      "numero_pagina_display": "42",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 3,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-121",
+          "sku": "YOL-ENT-121",
+          "nombre_yolitia": "Trofeo Guante de Oro",
+          "subcategoria": "Juguetes",
+          "imagen_filename": "YOL-121_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-121/YOL-121_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-124",
+          "sku": "YOL-ENT-124",
+          "nombre_yolitia": "Llavero Game Boy",
+          "subcategoria": "Juguetes",
+          "imagen_filename": "YOL-124_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-124/YOL-124_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-131",
+          "sku": "YOL-ENT-131",
+          "nombre_yolitia": "Rompecabezas Fracciones",
+          "subcategoria": "Rompecabezas",
+          "imagen_filename": "YOL-131_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-131/YOL-131_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x3: 3 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 43,
+      "numero_pagina_display": "43",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 3,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-151",
+          "sku": "YOL-ENT-151",
+          "nombre_yolitia": "Rompecabezas Cuerpo Humano",
+          "subcategoria": "Rompecabezas",
+          "imagen_filename": "YOL-151_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-151/YOL-151_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-155",
+          "sku": "YOL-ENT-155",
+          "nombre_yolitia": "Rompecabezas Animales África",
+          "subcategoria": "Rompecabezas",
+          "imagen_filename": "YOL-155_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-155/YOL-155_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-158",
+          "sku": "YOL-ENT-158",
+          "nombre_yolitia": "Rompecabezas Animales",
+          "subcategoria": "Rompecabezas",
+          "imagen_filename": "YOL-158_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-158/YOL-158_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x3: 3 producto(s)"
+    },
+    {
+      "tipo": "separador_categoria",
+      "pagina_numero": 44,
+      "numero_pagina_display": "44",
+      "categoria": "Regalos & Coleccionables",
+      "orden_categoria": 5,
+      "total_categorias": 5,
+      "elementos": [],
+      "notas": "Media pagina: nombre categoria en grande + franja azul niebla + icono"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 45,
+      "numero_pagina_display": "45",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-011",
+          "sku": "YOL-REG-011",
+          "nombre_yolitia": "Calavera del Corazón",
+          "subcategoria": "Figuras Temáticas",
+          "imagen_filename": "YOL-011_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-011/YOL-011_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": true,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 46,
+      "numero_pagina_display": "46",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-022",
+          "sku": "YOL-REG-022",
+          "nombre_yolitia": "Corazón de Movimiento Eterno",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-022_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-022/YOL-022_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-051",
+          "sku": "YOL-REG-051",
+          "nombre_yolitia": "Nacimiento Iluminado",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-051_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-051/YOL-051_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 47,
+      "numero_pagina_display": "47",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-061",
+          "sku": "YOL-REG-061",
+          "nombre_yolitia": "Popocatepetl Mexico City Volcano Topographic Map",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-061_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-061/YOL-061_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-062",
+          "sku": "YOL-REG-062",
+          "nombre_yolitia": "Topper Graduación 2026",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-062_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-062/YOL-062_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 48,
+      "numero_pagina_display": "48",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-066",
+          "sku": "YOL-REG-066",
+          "nombre_yolitia": "Pirámide Maya",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-066_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-066/YOL-066_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-067",
+          "sku": "YOL-REG-067",
+          "nombre_yolitia": "Pirámide Chichén Itzá",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-067_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-067/YOL-067_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 49,
+      "numero_pagina_display": "49",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-069",
+          "sku": "YOL-REG-069",
+          "nombre_yolitia": "Cristo Redentor",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-069_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-069/YOL-069_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-070",
+          "sku": "YOL-REG-070",
+          "nombre_yolitia": "Catedral de Florencia",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-070_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-070/YOL-070_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 50,
+      "numero_pagina_display": "50",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-071",
+          "sku": "YOL-REG-071",
+          "nombre_yolitia": "Gran Muralla China",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-071_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-071/YOL-071_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-072",
+          "sku": "YOL-REG-072",
+          "nombre_yolitia": "Pirámides de Giza",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-072_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-072/YOL-072_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 51,
+      "numero_pagina_display": "51",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-073",
+          "sku": "YOL-REG-073",
+          "nombre_yolitia": "Partenón",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-073_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-073/YOL-073_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-074",
+          "sku": "YOL-REG-074",
+          "nombre_yolitia": "Castillo de Chichén Itzá",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-074_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-074/YOL-074_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 52,
+      "numero_pagina_display": "52",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-077",
+          "sku": "YOL-REG-077",
+          "nombre_yolitia": "Tarjeta Tie Fighter",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-077_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-077/YOL-077_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-078",
+          "sku": "YOL-REG-078",
+          "nombre_yolitia": "Tarjeta Esqueleto T-Rex",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-078_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-078/YOL-078_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 53,
+      "numero_pagina_display": "53",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-079",
+          "sku": "YOL-REG-079",
+          "nombre_yolitia": "Tarjeta AT-ST Walker",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-079_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-079/YOL-079_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-081",
+          "sku": "YOL-REG-081",
+          "nombre_yolitia": "Charizard Voronoi",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-081_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-081/YOL-081_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 54,
+      "numero_pagina_display": "54",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-086",
+          "sku": "YOL-REG-086",
+          "nombre_yolitia": "Globo Terráqueo Minimalista",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-086_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-086/YOL-086_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-089",
+          "sku": "YOL-REG-089",
+          "nombre_yolitia": "Estante Goteo",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-089_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-089/YOL-089_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 55,
+      "numero_pagina_display": "55",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-090",
+          "sku": "YOL-REG-090",
+          "nombre_yolitia": "Estantes Hongo",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-090_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-090/YOL-090_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-096",
+          "sku": "YOL-REG-096",
+          "nombre_yolitia": "Topper Boda",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-096_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-096/YOL-096_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 56,
+      "numero_pagina_display": "56",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-100",
+          "sku": "YOL-REG-100",
+          "nombre_yolitia": "Lámpara Calavera",
+          "subcategoria": "Figuras Temáticas",
+          "imagen_filename": "YOL-100_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-100/YOL-100_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-102",
+          "sku": "YOL-REG-102",
+          "nombre_yolitia": "Tarjeta DeLorean",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-102_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-102/YOL-102_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 57,
+      "numero_pagina_display": "57",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-105",
+          "sku": "YOL-REG-105",
+          "nombre_yolitia": "Tarjeta Perros",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-105_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-105/YOL-105_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-106",
+          "sku": "YOL-REG-106",
+          "nombre_yolitia": "Tarjeta Vida Silvestre",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-106_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-106/YOL-106_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 58,
+      "numero_pagina_display": "58",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-109",
+          "sku": "YOL-REG-109",
+          "nombre_yolitia": "Resonancia Celestial",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-109_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-109/YOL-109_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-111",
+          "sku": "YOL-REG-111",
+          "nombre_yolitia": "Tarjeta Motos",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-111_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-111/YOL-111_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 59,
+      "numero_pagina_display": "59",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-114",
+          "sku": "YOL-REG-114",
+          "nombre_yolitia": "Llavero Pokeball",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-114_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-114/YOL-114_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-116",
+          "sku": "YOL-REG-116",
+          "nombre_yolitia": "Llavero Kettlebell Gym",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-116_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-116/YOL-116_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 60,
+      "numero_pagina_display": "60",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-118",
+          "sku": "YOL-REG-118",
+          "nombre_yolitia": "Llavero Nike",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-118_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-118/YOL-118_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-119",
+          "sku": "YOL-REG-119",
+          "nombre_yolitia": "Llavero Casco Ciclismo",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-119_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-119/YOL-119_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 61,
+      "numero_pagina_display": "61",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-120",
+          "sku": "YOL-REG-120",
+          "nombre_yolitia": "Llavero Kettlebell Gym",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-120_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-120/YOL-120_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-122",
+          "sku": "YOL-REG-122",
+          "nombre_yolitia": "Trofeo Bota de Oro",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-122_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-122/YOL-122_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 62,
+      "numero_pagina_display": "62",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-123",
+          "sku": "YOL-REG-123",
+          "nombre_yolitia": "Llavero PlayStation",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-123_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-123/YOL-123_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-125",
+          "sku": "YOL-REG-125",
+          "nombre_yolitia": "Llavero Super Nintendo",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-125_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-125/YOL-125_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 63,
+      "numero_pagina_display": "63",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-129",
+          "sku": "YOL-REG-129",
+          "nombre_yolitia": "Llavero NFC Fender",
+          "subcategoria": "Llaveros",
+          "imagen_filename": "YOL-129_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-129/YOL-129_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-136",
+          "sku": "YOL-REG-136",
+          "nombre_yolitia": "Ajedrez Portátil Minimalista",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-136_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-136/YOL-136_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 64,
+      "numero_pagina_display": "64",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-137",
+          "sku": "YOL-REG-137",
+          "nombre_yolitia": "Lista de Tareas para Niños",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-137_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-137/YOL-137_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-142",
+          "sku": "YOL-REG-142",
+          "nombre_yolitia": "Fracciones Montessori",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-142_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-142/YOL-142_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 65,
+      "numero_pagina_display": "65",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x2",
+      "num_productos": 2,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-143",
+          "sku": "YOL-REG-143",
+          "nombre_yolitia": "Cuerpo Humano Educativo",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-143_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-143/YOL-143_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        },
+        {
+          "posicion": 2,
+          "producto_id": "YOL-150",
+          "sku": "YOL-REG-150",
+          "nombre_yolitia": "Soporte para Joyería",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-150_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-150/YOL-150_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 66,
+      "numero_pagina_display": "66",
+      "categoria": "Regalos & Coleccionables",
+      "grid": "1x1",
+      "num_productos": 1,
+      "elementos": [
+        {
+          "posicion": 1,
+          "producto_id": "YOL-157",
+          "sku": "YOL-REG-157",
+          "nombre_yolitia": "Contenedor Concha Redondeada",
+          "subcategoria": "Coleccionables",
+          "imagen_filename": "YOL-157_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-157/YOL-157_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
+        }
+      ],
+      "notas": "Grid 1x1: 1 producto(s)"
+    },
+    {
+      "tipo": "material_pla",
+      "pagina_numero": 67,
+      "numero_pagina_display": "67",
+      "elementos": [],
+      "notas": "Seccion PLA: 'HECHO DE PLA — Bello por dentro y por fuera'"
+    },
+    {
+      "tipo": "colores",
+      "pagina_numero": 68,
+      "numero_pagina_display": "68",
+      "elementos": [],
+      "notas": "Colores disponibles para los modelos"
+    },
+    {
+      "tipo": "compromiso",
+      "pagina_numero": 69,
+      "numero_pagina_display": "69",
+      "elementos": [],
+      "notas": "Compromiso ambiental: 10% ganancias a conservacion + redes sociales"
+    },
+    {
+      "tipo": "contraportada",
+      "pagina_numero": null,
+      "numero_pagina_display": null,
+      "elementos": [],
+      "notas": "Manifiesto Yolitia: 'Un proyecto circular'"
+    }
+  ]
+}

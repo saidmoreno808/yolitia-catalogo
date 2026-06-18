@@ -36,10 +36,10 @@ jobs:
         run: |
           set -e
           mkdir -p public
-          if gh release download v1 --repo "$GITHUB_REPOSITORY" --pattern 'catalogo-yolitia.pdf' --dir public/ 2>/dev/null; then
-            echo "PDF descargado desde la release v1"
+          if gh release download v2 --repo "$GITHUB_REPOSITORY" --pattern 'catalogo-yolitia.pdf' --dir public/ 2>/dev/null; then
+            echo "PDF descargado desde la release v2"
           else
-            echo "No se encontro release v1; se sirve sin PDF"
+            echo "No se encontro release v2; se sirve sin PDF"
           fi
 
       - name: Subir artefacto Pages

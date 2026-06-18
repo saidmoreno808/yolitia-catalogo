@@ -351,11 +351,16 @@ def apply_overrides(productos, overrides):
 
 def draw_minimal_header(c, subtitle="CATÁLOGO DE PRODUCTOS"):
     """Header minimalista en español (portrait)."""
-    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 45, 22, color=COLOR_VERDE)
-    c.setFont(SCRIPT_REG, 30)
+    # Header mas compacto y con mas margen superior
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 40, 18, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 26)
     c.setFillColor(COLOR_MORADO)
-    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 30)
-    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 75, "Yolitia")
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 26)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 68, "Yolitia")
+    # Linea fina debajo del header
+    c.setStrokeColor(COLOR_KRAFT)
+    c.setLineWidth(0.3)
+    c.line(MARGIN + 40, PAGE_H - 88, PAGE_W - MARGIN - 40, PAGE_H - 88)
 
 
 def draw_footer(c, page_num):
@@ -644,43 +649,58 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
 
     draw_minimal_header(c)
 
-    c.setFont(SCRIPT_REG, 24)
+    # Subtitulo mas abajo del header (header termina en y=765)
+    c.setFont(SCRIPT_REG, 22)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Lugares del Mundo")
+    c.drawCentredString(PAGE_W / 2, 720, "Lugares del Mundo")
 
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "MINIATURAS ARQUITECTONICAS  ·  EDICION LIMITADA")
+    c.drawCentredString(PAGE_W / 2, 700, "MINIATURAS ARQUITECTONICAS  ·  EDICION LIMITADA")
 
-    draw_thin_line(c, PAGE_W / 2 - 80, PAGE_H - 165, PAGE_W / 2 + 80, PAGE_H - 165,
+    draw_thin_line(c, PAGE_W / 2 - 80, 685, PAGE_W / 2 + 80, 685,
                    color=COLOR_NEGRO, width=0.5)
 
     overrides = load_overrides()
     landscape_colors = overrides.get("landmarks_terrain_only", {})
 
     n = len(landmark_ids)
+    # Layout: 1 landmark grande centrado, o 2 apilados
     if n == 1:
-        col_w = 320
-        polaroid_h = 320
-        # Polaroid ocupa la mitad superior centrada
-        positions = [(PAGE_W / 2 - col_w / 2, 380)]
+        col_w = 280
+        polaroid_h = 260
+        # Polaroid top en y=580, bot en y=320 (etiqueta 60pt debajo: 260-320)
+        positions = [(PAGE_W / 2 - col_w / 2, 320)]
     elif n == 2:
-        col_w = 320
-        polaroid_h = 240
-        # Apilados verticalmente: uno arriba del otro
+        col_w = 280
+        polaroid_h = 200
+        # 2 apilados: top y=540 bot y=340; bot y=160 bot y=-40 (etiqueta)
+        # Mejor: polaroid 1 top=440 bot=240 (etiqueta 180-240)
+        #        polaroid 2 top=160 bot=-40 (etiqueta -100 a -40 -> fuera!)
+        # Hay que hacer el polaroid mas pequeno
+        # polaroid_h=160, total con etiqueta = 220
+        # polaroid 1: y=440, bot=600, etiqueta 380-440
+        # polaroid 2: y=160, bot=320, etiqueta 100-160
+        # 60pt de gap entre etiqueta1 bot (440) y polaroid2 top (160) -> mucho
+        # Compacto: polaroid_h=140
+        # polaroid 1: y=400, bot=540, etiqueta 340-400
+        # polaroid 2: y=140, bot=280, etiqueta 80-140
+        # Gap = 60 entre etiqueta1 bot y polaroid2 top
+        col_w = 280
+        polaroid_h = 150
         positions = [
-            (PAGE_W / 2 - col_w / 2, 480),
-            (PAGE_W / 2 - col_w / 2, 240),
+            (PAGE_W / 2 - col_w / 2, 400),
+            (PAGE_W / 2 - col_w / 2, 130),
         ]
     else:
-        col_w = 200
-        polaroid_h = 200
+        col_w = 180
+        polaroid_h = 130
         positions = []
         for i in range(n):
-            gap = 20
+            gap = 15
             total_w = n * col_w + (n - 1) * gap
             start_x = (PAGE_W - total_w) / 2
-            positions.append((start_x + i * (col_w + gap), 380))
+            positions.append((start_x + i * (col_w + gap), 400))
 
     for i, pid in enumerate(landmark_ids):
         if pid not in productos_map:
@@ -695,10 +715,11 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
         if img_path:
             fit_image_in_box(c, img_path, box["x"], box["y"], box["w"], box["h"])
 
-        label_h = 60
+        # Etiqueta DEBAJO del polaroid (no encima)
+        label_h = 50
         label_w = col_w
         label_x = px
-        label_y = py - label_h + 6
+        label_y = py - label_h - 4  # 4pt de gap entre polaroid bot y label top
 
         draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                          color=COLOR_CREMA, has_tape=False)
@@ -706,33 +727,34 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
         c.saveState()
         c.translate(label_x + label_w / 2, label_y + label_h / 2)
 
-        c.setFont(SANS_BOLD, 9.5)
+        c.setFont(SANS_BOLD, 9)
         c.setFillColor(COLOR_NEGRO)
-        c.drawCentredString(0, 18, f"\u201C{prod['_display_name'].upper()}\u201D")
+        c.drawCentredString(0, 8, f"\u201C{prod['_display_name'].upper()}\u201D")
 
         if prod.get("_display_price"):
-            c.setFont(SERIF_BOLD, 17)
+            c.setFont(SERIF_BOLD, 14)
             c.setFillColor(COLOR_NEGRO)
-            c.drawCentredString(0, -5, f"${prod['_display_price']:.0f}")
+            c.drawCentredString(0, -10, f"${prod['_display_price']:.0f}")
 
         if custom_color:
             c.setFillColor(colors.HexColor(custom_color["hex"]))
             c.setStrokeColor(colors.HexColor("#BFB59F"))
             c.setLineWidth(0.3)
-            c.circle(-label_w / 2 + 16, 0, 6, stroke=1, fill=1)
-            c.setFont(SANS_REG, 6.5)
+            c.circle(-label_w / 2 + 16, 0, 5, stroke=1, fill=1)
+            c.setFont(SANS_REG, 6)
             c.setFillColor(COLOR_NEGRO_SUAVE)
-            c.drawString(-label_w / 2 + 26, -2, custom_color["primary"].upper())
+            c.drawString(-label_w / 2 + 24, -2, custom_color["primary"].upper())
 
         c.restoreState()
 
-    c.setFont(SERIF_ITAL, 9)
+    # Nota al pie
+    c.setFont(SERIF_ITAL, 8.5)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, 65,
+    c.drawCentredString(PAGE_W / 2, 55,
                         "Cada lugar se imprime en su propio color de terreno especial")
-    c.setFont(SANS_REG, 7.5)
+    c.setFont(SANS_REG, 7)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 50,
+    c.drawCentredString(PAGE_W / 2, 42,
                         "ACABADO MATE QUE RESALTA LOS DETALLES ARQUITECTONICOS")
 
     draw_footer(c, page_num)
@@ -884,19 +906,21 @@ def build_hero_product_page(c, elem, productos, page_num):
 
     img_path = get_image_path(elem, productos)
 
-    # Polaroid centrado arriba
-    pw, ph = 300, 360
+    # Polaroid centrado. Header termina en y~785. Necesito gap de 30pt.
+    # Polaroid bot = 755, top = 755 - ph. ph=320 -> top=435. Demasiado alto.
+    # Mejor: ph=280, top=475, bot=755.
+    pw, ph = 300, 280
     px = (PAGE_W - pw) / 2
-    py = 420
+    py = 470
 
     draw_product_card_scrapbook(c, px, py, pw, ph, prod, img_path,
-                                 rot_photo=0, rot_label=0, max_desc_lines=6)
+                                 rot_photo=0, rot_label=0, max_desc_lines=4)
 
     # Info label centrado abajo (ancho completo)
     info_w = PAGE_W - 2 * MARGIN
-    info_h = 240
+    info_h = 220
     info_x = MARGIN
-    info_y = 90
+    info_y = 70
 
     draw_paper_label(c, info_x, info_y, info_w, info_h, rotation=0,
                      color=COLOR_CREMA_OSC, has_tape=True, tape_pos="top")
@@ -1020,10 +1044,15 @@ def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 340, 260
-    # 2 productos apilados con gap
-    polaroid_y_top = PAGE_H - 145 - ph
-    polaroid_y_bot = polaroid_y_top - ph - 50
+    pw, ph = 340, 240
+    # 2 productos apilados. Margen desde header (y~85) y footer (y~40).
+    # Top polaroid y=540, bottom polaroid y=215
+    # Espacio disponible: 540-215 = 325 (incluye polaroid+etiqueta)
+    # Etiqueta va 80pt debajo del polaroid. Polaroid top->bottom: 240
+    # polaroid 1: y=540 a 780, etiqueta y=460 a 540
+    # polaroid 2: y=215 a 455, etiqueta y=135 a 215
+    polaroid_y_top = PAGE_H - 302
+    polaroid_y_bot = 215
 
     positions = [
         ((PAGE_W - pw) / 2, polaroid_y_top, -0.3, 0.2, 3),
