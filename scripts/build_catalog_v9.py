@@ -77,9 +77,35 @@ def register_fonts():
 # ============================================================================
 # PÁGINA
 # ============================================================================
+# reportlab usa coordenadas cartesianas con origen en la esquina INFERIOR-IZQUIERDA.
+# PAGE_H = 842 (A4 portrait vertical).
+# Para evitar confusion, definimos zonas en terminos de "y desde el FONDO":
 PAGE_W, PAGE_H = A4  # 595 x 842 pt (210x297 mm portrait)
 MARGIN = 36
 CONTENT_W = PAGE_W - (2 * MARGIN)
+
+# Zonas verticales (todas en coords "y desde el FONDO"):
+# En reportlab y crece hacia arriba. PAGE_H=842.
+# Header: isotopo y=820, script baseline y=786, linea y=762. El header ocupa hasta y~755.
+# Contenido: y entre 750 (debajo del header) y 60 (arriba del footer).
+PAGE_BOTTOM = 0
+PAGE_TOP = PAGE_H
+FOOTER_TOP = 60   # el footer arranca en y=60 (todo lo de abajo esta reservado)
+HEADER_BOTTOM = 750  # el header termina en y=750 (todo lo de abajo esta disponible)
+CONTENT_AREA_BOTTOM = FOOTER_TOP + 8  # 68: margen antes del footer
+CONTENT_AREA_TOP = HEADER_BOTTOM  # 750
+CONTENT_AREA_HEIGHT = CONTENT_AREA_TOP - CONTENT_AREA_BOTTOM  # ~682pt
+
+
+# Helper: convierte "y desde el top" a "y desde el fondo" (coords reportlab)
+def y_from_top(y_top: float) -> float:
+    """y_top = 0 en el borde superior; retorna y en coords reportlab."""
+    return PAGE_H - y_top
+
+
+# Helper: convierte "y desde el fondo" a "y desde el top" (visual)
+def y_from_bottom(y_bot: float) -> float:
+    return PAGE_H - y_bot
 
 
 # ============================================================================
@@ -296,6 +322,34 @@ def fit_image_in_box(c, img_path, box_x, box_y, box_w, box_h):
         print(f"    Error imagen {img_path}: {e}")
 
 
+def fit_image_in_box_cover(c, img_path, box_x, box_y, box_w, box_h):
+    """Como fit_image_in_box pero la imagen LLENA el area (puede recortarse).
+    Util para landmarks con imagenes pequenas que deben verse grandes.
+    """
+    try:
+        img = ImageReader(img_path)
+        iw, ih = img.getSize()
+        ratio = iw / ih
+        box_ratio = box_w / box_h
+        if ratio > box_ratio:
+            # imagen mas ancha: limitamos por alto
+            h = box_h
+            w = box_h * ratio
+        else:
+            # imagen mas alta: limitamos por ancho
+            w = box_w
+            h = box_w / ratio
+        x = box_x + (box_w - w) / 2
+        y = box_y + (box_h - h) / 2
+        # Fondo blanco para areas vacias del box
+        c.setFillColorRGB(0.95, 0.94, 0.91)
+        c.rect(box_x, box_y, box_w, box_h, fill=1, stroke=0)
+        c.drawImage(img_path, x, y, width=w, height=h,
+                   preserveAspectRatio=True, mask='auto')
+    except Exception as e:
+        print(f"    Error imagen {img_path}: {e}")
+
+
 # ============================================================================
 # OVERRIDES
 # ============================================================================
@@ -350,36 +404,41 @@ def apply_overrides(productos, overrides):
 # ============================================================================
 
 def draw_minimal_header(c, subtitle="CATÁLOGO DE PRODUCTOS"):
-    """Header minimalista en español (portrait)."""
-    # Header mas compacto y con mas margen superior
-    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 40, 18, color=COLOR_VERDE)
-    c.setFont(SCRIPT_REG, 26)
+    """Header minimalista en español (portrait).
+    Header ocupa y=820 (isotopo) hasta y=755 (linea). Contenido debe estar
+    debajo de HEADER_BOTTOM=750.
+    """
+    # Isotopo
+    draw_isotipo_hoja(c, PAGE_W / 2, 822, 16, color=COLOR_VERDE)
+    # Script "Yolitia" centrado, baseline en y=790
+    c.setFont(SCRIPT_REG, 24)
     c.setFillColor(COLOR_MORADO)
-    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 26)
-    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 68, "Yolitia")
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 24)
+    c.drawString((PAGE_W - text_w) / 2, 790, "Yolitia")
     # Linea fina debajo del header
     c.setStrokeColor(COLOR_KRAFT)
     c.setLineWidth(0.3)
-    c.line(MARGIN + 40, PAGE_H - 88, PAGE_W - MARGIN - 40, PAGE_H - 88)
+    c.line(MARGIN + 40, 768, PAGE_W - MARGIN - 40, 768)
 
 
 def draw_footer(c, page_num):
+    """Footer en y=0..50. Contenido debe estar arriba de FOOTER_TOP=60."""
     c.saveState()
     c.setStrokeColor(COLOR_GRIS_LINEA)
     c.setLineWidth(0.4)
-    c.line(MARGIN, 32, PAGE_W - MARGIN, 32)
+    c.line(MARGIN, 52, PAGE_W - MARGIN, 52)
 
     c.setFont(SERIF_ITAL, 8)
     c.setFillColor(COLOR_MARRON)
-    c.drawString(MARGIN, 18, "yolitia.bio")
+    c.drawString(MARGIN, 36, "yolitia.bio")
 
     c.setFont(SERIF_REG, 8)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, 18, f"{page_num:02d}")
+    c.drawCentredString(PAGE_W / 2, 36, f"{page_num:02d}")
 
     c.setFont(SANS_REG, 6.5)
     c.setFillColor(COLOR_MARRON)
-    c.drawRightString(PAGE_W - MARGIN, 18, "COLECCIÓN VERANO  ·  2026")
+    c.drawRightString(PAGE_W - MARGIN, 36, "COLECCIÓN VERANO  ·  2026")
 
     c.restoreState()
 
@@ -396,25 +455,25 @@ def build_cover(c):
 
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.55)
 
-    # Logo arriba centrado
-    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 150, 64, color=COLOR_VERDE)
+    # Logo arriba centrado (cerca del top)
+    draw_isotipo_hoja(c, PAGE_W / 2, 730, 60, color=COLOR_VERDE)
 
-    # Nombre de marca (más grande porque tenemos más alto)
-    c.setFont(SCRIPT_REG, 96)
+    # Nombre de marca
+    c.setFont(SCRIPT_REG, 90)
     c.setFillColor(COLOR_MORADO)
     text = "Yolitia"
-    w = pdfmetrics.stringWidth(text, SCRIPT_REG, 96)
-    c.drawString((PAGE_W - w) / 2, PAGE_H - 240, text)
+    w = pdfmetrics.stringWidth(text, SCRIPT_REG, 90)
+    c.drawString((PAGE_W - w) / 2, 650, text)
 
     # Subtítulo
-    c.setFont(SANS_REG, 14)
+    c.setFont(SANS_REG, 13)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     sub = "COLECCIÓN  ·  VERANO  ·  2026"
-    w = pdfmetrics.stringWidth(sub, SANS_REG, 14)
-    c.drawString((PAGE_W - w) / 2, PAGE_H - 280, sub)
+    w = pdfmetrics.stringWidth(sub, SANS_REG, 13)
+    c.drawString((PAGE_W - w) / 2, 612, sub)
 
     # Línea divisoria
-    draw_thin_line(c, PAGE_W / 2 - 70, PAGE_H - 305, PAGE_W / 2 + 70, PAGE_H - 305,
+    draw_thin_line(c, PAGE_W / 2 - 70, 590, PAGE_W / 2 + 70, 590,
                    color=COLOR_NEGRO, width=0.7)
 
     # "CATÁLOGO"
@@ -422,20 +481,20 @@ def build_cover(c):
     c.setFillColor(COLOR_NEGRO)
     cat = "CATÁLOGO"
     w = pdfmetrics.stringWidth(cat, SCRIPT_REG, 26)
-    c.drawString((PAGE_W - w) / 2, PAGE_H - 345, cat)
+    c.drawString((PAGE_W - w) / 2, 555, cat)
 
     # Tagline italic
-    c.setFont(SERIF_ITAL, 15)
+    c.setFont(SERIF_ITAL, 14)
     c.setFillColor(COLOR_MARRON)
     line1 = "Diseño consciente"
     line2 = "Impreso aquí · Hecho para durar"
-    w1 = pdfmetrics.stringWidth(line1, SERIF_ITAL, 15)
-    w2 = pdfmetrics.stringWidth(line2, SERIF_ITAL, 15)
-    c.drawString((PAGE_W - w1) / 2, 150, line1)
-    c.drawString((PAGE_W - w2) / 2, 128, line2)
+    w1 = pdfmetrics.stringWidth(line1, SERIF_ITAL, 14)
+    w2 = pdfmetrics.stringWidth(line2, SERIF_ITAL, 14)
+    c.drawString((PAGE_W - w1) / 2, 200, line1)
+    c.drawString((PAGE_W - w2) / 2, 180, line2)
 
     # Washtape al pie
-    draw_washi_tape(c, PAGE_W / 2 - 110, 80, 220, 18, angle=-3)
+    draw_washi_tape(c, PAGE_W / 2 - 110, 130, 220, 18, angle=-3)
 
     c.showPage()
 
@@ -449,15 +508,15 @@ def build_index(c, layout):
 
     draw_minimal_header(c)
 
-    c.setFont(SCRIPT_REG, 30)
+    # "Contenido" debajo del header
+    c.setFont(SCRIPT_REG, 28)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 145, "Contenido")
+    c.drawCentredString(PAGE_W / 2, 705, "Contenido")
 
-    draw_thin_line(c, PAGE_W / 2 - 50, PAGE_H - 158, PAGE_W / 2 + 50, PAGE_H - 158,
+    draw_thin_line(c, PAGE_W / 2 - 50, 692, PAGE_W / 2 + 50, 692,
                    color=COLOR_NEGRO, width=0.6)
 
-    y = PAGE_H - 195
-
+    y = 655
     categorias_vistas = set()
     for pagina in layout["paginas"]:
         if pagina["tipo"] == "separador_categoria":
@@ -559,10 +618,13 @@ def draw_product_card_scrapbook(c, x, y, w, h, prod, img_path, rot_photo=0, rot_
         draw_color_palette_strip(c, palette_x, palette_y, palette_w, custom_palette)
 
     # === Etiqueta (debajo del polaroid) ===
+    # Bug fix: en coords reportlab (y crece hacia arriba), el polaroid va de y a y+ph.
+    # La etiqueta debe estar DEBAJO del polaroid: su top debe ser MENOR que polaroid bot.
+    # Formula correcta: label_y = y - 8 - label_h (8pt de gap entre polaroid bot y etiqueta top).
     label_w = w * 0.95
-    label_h = 80  # Más alto para portrait (descripción con más espacio)
+    label_h = 80
     label_x = x + (w - label_w) / 2
-    label_y = y - label_h + 14
+    label_y = y - 8 - label_h
 
     draw_paper_label(c, label_x, label_y, label_w, label_h,
                      rotation=rot_label, color=COLOR_CREMA, has_tape=False)
@@ -640,7 +702,9 @@ def draw_product_card_scrapbook(c, x, y, w, h, prod, img_path, rot_photo=0, rot_
 # ============================================================================
 
 def build_landmarks_page(c, productos_map, page_num, landmark_ids):
-    """Pagina de landmarks en portrait: 1 o 2 lugares apilados."""
+    """Pagina de landmarks en portrait: 1 o 2 lugares apilados.
+    HEADER_BOTTOM=750, FOOTER_TOP=60. Area util: 690pt.
+    """
     print(f"  Lugares del Mundo (pág {page_num}) — {len(landmark_ids)} lugares")
 
     c.setFillColor(COLOR_MARFIL)
@@ -649,58 +713,80 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
 
     draw_minimal_header(c)
 
-    # Subtitulo mas abajo del header (header termina en y=765)
+    # Subtitulo debajo del header
+    # Header termina en y=750 (linea). Dejamos 20pt de gap, subtitulo en y=730.
     c.setFont(SCRIPT_REG, 22)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, 720, "Lugares del Mundo")
+    c.drawCentredString(PAGE_W / 2, 715, "Lugares del Mundo")
 
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 700, "MINIATURAS ARQUITECTONICAS  ·  EDICION LIMITADA")
+    c.drawCentredString(PAGE_W / 2, 695, "MINIATURAS ARQUITECTONICAS  ·  EDICION LIMITADA")
 
-    draw_thin_line(c, PAGE_W / 2 - 80, 685, PAGE_W / 2 + 80, 685,
+    draw_thin_line(c, PAGE_W / 2 - 80, 680, PAGE_W / 2 + 80, 680,
                    color=COLOR_NEGRO, width=0.5)
 
     overrides = load_overrides()
     landscape_colors = overrides.get("landmarks_terrain_only", {})
 
     n = len(landmark_ids)
-    # Layout: 1 landmark grande centrado, o 2 apilados
+    col_w = 280
+    label_h = 50
+    gap_polaroid_label = 8
+    inter_landmark_gap = 30
+
     if n == 1:
-        col_w = 280
-        polaroid_h = 260
-        # Polaroid top en y=580, bot en y=320 (etiqueta 60pt debajo: 260-320)
-        positions = [(PAGE_W / 2 - col_w / 2, 320)]
+        # 1 landmark centrado. polaroid + etiqueta = polaroid_h + label_h + gap
+        # Disponible: 680 (linea) - 60 (footer) = 620pt
+        # polaroid_h = 400, label_h = 50, gap = 8 -> 458. Margen 81+81.
+        polaroid_h = 400
+        # polaroid top y = 670 - polaroid_h = 270. Etiqueta bot = 270 - 8 - 50 = 212.
+        # polaroid bot y = 270. Etiqueta top y = 212, bot = 262.
+        # Margen arriba: 670-270 = 400... no, polaroid bot = 270.
+        # polaroid top = 270+400=670, bot = 270. Header termino 750. Gap polaroid-header = 750-670=80.
+        p1_y = 270
+        l1_y = p1_y - gap_polaroid_label - label_h
+        positions = [(PAGE_W / 2 - col_w / 2, p1_y)]
+        label_positions = [l1_y]
     elif n == 2:
-        col_w = 280
-        polaroid_h = 200
-        # 2 apilados: top y=540 bot y=340; bot y=160 bot y=-40 (etiqueta)
-        # Mejor: polaroid 1 top=440 bot=240 (etiqueta 180-240)
-        #        polaroid 2 top=160 bot=-40 (etiqueta -100 a -40 -> fuera!)
-        # Hay que hacer el polaroid mas pequeno
-        # polaroid_h=160, total con etiqueta = 220
-        # polaroid 1: y=440, bot=600, etiqueta 380-440
-        # polaroid 2: y=160, bot=320, etiqueta 100-160
-        # 60pt de gap entre etiqueta1 bot (440) y polaroid2 top (160) -> mucho
-        # Compacto: polaroid_h=140
-        # polaroid 1: y=400, bot=540, etiqueta 340-400
-        # polaroid 2: y=140, bot=280, etiqueta 80-140
-        # Gap = 60 entre etiqueta1 bot y polaroid2 top
-        col_w = 280
-        polaroid_h = 150
+        # 2 landmarks apilados. Cada uno = polaroid + etiqueta + 2 gaps.
+        # Area util: 680 (linea) - 60 (footer) = 620pt
+        # 2 bloques * (polaroid + label) + 1 gap entre bloques = 620
+        # 2 * (polaroid_h + 50) + 30 = 620
+        # 2*polaroid_h + 130 = 620
+        # polaroid_h = 245
+        polaroid_h = 220
+        # Layout de arriba a abajo (coords reportlab, mayor y = mas arriba):
+        # Polaroid 1 top = 670 (debajo de la linea 680 con margen 10)
+        # Polaroid 1 bot = 670 - 220 = 450
+        p1_y = 670 - polaroid_h  # 450
+        # Etiqueta 1: 8pt debajo de polaroid 1 bot
+        l1_y = p1_y - gap_polaroid_label - label_h  # 450-8-50 = 392
+        # Gap entre etiqueta 1 bot y polaroid 2 top = 30pt
+        # etiqueta 1 bot = 392+50 = 442
+        # polaroid 2 top = 442 - 30 = 412
+        # polaroid 2 bot = 412 - 220 = 192
+        p2_y = (l1_y + label_h) - inter_landmark_gap - polaroid_h  # (392+50)-30-220 = 192
+        l2_y = p2_y - gap_polaroid_label - label_h  # 192-8-50 = 134
         positions = [
-            (PAGE_W / 2 - col_w / 2, 400),
-            (PAGE_W / 2 - col_w / 2, 130),
+            (PAGE_W / 2 - col_w / 2, p1_y),
+            (PAGE_W / 2 - col_w / 2, p2_y),
         ]
+        label_positions = [l1_y, l2_y]
     else:
-        col_w = 180
         polaroid_h = 130
         positions = []
+        label_positions = []
+        gap = 15
+        total_w = n * col_w + (n - 1) * gap
+        start_x = (PAGE_W - total_w) / 2
+        # n lado a lado: cada uno ocupa polaroid + label + gap_polaroid_label
+        # Total vertical por landmark = 130 + 50 + 8 = 188
+        # Disponemos 620pt
+        # Como es horizontal, no se acumula vertical. Usar 1 sola fila.
         for i in range(n):
-            gap = 15
-            total_w = n * col_w + (n - 1) * gap
-            start_x = (PAGE_W - total_w) / 2
-            positions.append((start_x + i * (col_w + gap), 400))
+            positions.append((start_x + i * (col_w + gap), 500))  # polaroid bot y=500
+            label_positions.append(500 - gap_polaroid_label - label_h)
 
     for i, pid in enumerate(landmark_ids):
         if pid not in productos_map:
@@ -713,19 +799,21 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
 
         box = draw_polaroid_frame(c, px, py, col_w, polaroid_h, rotation=0, shadow=False)
         if img_path:
-            fit_image_in_box(c, img_path, box["x"], box["y"], box["w"], box["h"])
+            # fit_image_in_box usa contain (escala para que QUEPA). Para landmarks con
+            # imagenes pequeñas, queremos que la imagen llene el area.
+            # Cambio a "cover" para que ocupe todo el polaroid.
+            fit_image_in_box_cover(c, img_path, box["x"], box["y"], box["w"], box["h"])
 
-        # Etiqueta DEBAJO del polaroid (no encima)
-        label_h = 50
-        label_w = col_w
+        # Etiqueta
+        label_w_local = col_w
         label_x = px
-        label_y = py - label_h - 4  # 4pt de gap entre polaroid bot y label top
+        label_y = label_positions[i]
 
-        draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
+        draw_paper_label(c, label_x, label_y, label_w_local, label_h, rotation=0,
                          color=COLOR_CREMA, has_tape=False)
 
         c.saveState()
-        c.translate(label_x + label_w / 2, label_y + label_h / 2)
+        c.translate(label_x + label_w_local / 2, label_y + label_h / 2)
 
         c.setFont(SANS_BOLD, 9)
         c.setFillColor(COLOR_NEGRO)
@@ -740,21 +828,21 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
             c.setFillColor(colors.HexColor(custom_color["hex"]))
             c.setStrokeColor(colors.HexColor("#BFB59F"))
             c.setLineWidth(0.3)
-            c.circle(-label_w / 2 + 16, 0, 5, stroke=1, fill=1)
+            c.circle(-label_w_local / 2 + 16, 0, 5, stroke=1, fill=1)
             c.setFont(SANS_REG, 6)
             c.setFillColor(COLOR_NEGRO_SUAVE)
-            c.drawString(-label_w / 2 + 24, -2, custom_color["primary"].upper())
+            c.drawString(-label_w_local / 2 + 24, -2, custom_color["primary"].upper())
 
         c.restoreState()
 
     # Nota al pie
     c.setFont(SERIF_ITAL, 8.5)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, 55,
+    c.drawCentredString(PAGE_W / 2, 75,
                         "Cada lugar se imprime en su propio color de terreno especial")
     c.setFont(SANS_REG, 7)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 42,
+    c.drawCentredString(PAGE_W / 2, 60,
                         "ACABADO MATE QUE RESALTA LOS DETALLES ARQUITECTONICOS")
 
     draw_footer(c, page_num)
@@ -774,15 +862,16 @@ def build_colors_swatch_palette(c, page_num):
 
     draw_minimal_header(c)
 
+    # Subtitulo debajo del header
     c.setFont(SCRIPT_REG, 24)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Colores Disponibles")
+    c.drawCentredString(PAGE_W / 2, 715, "Colores Disponibles")
 
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "TODOS NUESTROS MODELOS ESTAN DISPONIBLES EN LOS SIGUIENTES ACABADOS")
+    c.drawCentredString(PAGE_W / 2, 695, "TODOS NUESTROS MODELOS ESTAN DISPONIBLES EN LOS SIGUIENTES ACABADOS")
 
-    draw_thin_line(c, PAGE_W / 2 - 80, PAGE_H - 165, PAGE_W / 2 + 80, PAGE_H - 165,
+    draw_thin_line(c, PAGE_W / 2 - 80, 680, PAGE_W / 2 + 80, 680,
                    color=COLOR_NEGRO, width=0.5)
 
     colores = [
@@ -847,45 +936,51 @@ def build_colors_swatch_palette(c, page_num):
 # ============================================================================
 
 def build_cover_collection_page(c, categoria, page_num):
+    """Separador de categoria. La etiqueta va debajo del header."""
     c.setFillColor(COLOR_MARFIL)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45)
 
     draw_minimal_header(c)
 
-    cy = PAGE_H / 2 - 30
-
-    label_w = 420
-    label_h = 360
+    # Etiqueta principal centrada. Area util HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690
+    # label_h = 480. Top y = 720 (debajo header con margen 30). Bot y = 720-480 = 240.
+    # 240 > FOOTER_TOP(60)+margen(90) = 150. OK.
+    label_w = 460
+    label_h = 480
     label_x = (PAGE_W - label_w) / 2
-    label_y = cy - label_h / 2
+    label_y = 720 - label_h  # 240 (etiqueta top, va de 240 a 720)
 
     draw_paper_label(c, label_x, label_y, label_w, label_h,
                      rotation=0, color=COLOR_CREMA, has_tape=True, tape_pos="top")
 
-    draw_washi_tape(c, label_x + 30, label_y - 8, 80, 12, angle=-8)
+    draw_washi_tape(c, label_x + 30, label_y + label_h - 6, 80, 12, angle=-8)
 
     c.saveState()
+
+    # Texto centrado dentro de la etiqueta
+    cy = label_y + label_h / 2
+
     c.setFont(SCRIPT_REG, 42)
     c.setFillColor(COLOR_NEGRO)
     cat_text = categoria
     if pdfmetrics.stringWidth(cat_text, SCRIPT_REG, 42) > label_w - 40:
         c.setFont(SCRIPT_REG, 34)
-    c.drawCentredString(PAGE_W / 2, cy + 90, cat_text)
+    c.drawCentredString(PAGE_W / 2, cy + 110, cat_text)
 
-    draw_thin_line(c, PAGE_W / 2 - 50, cy + 60, PAGE_W / 2 + 50, cy + 60,
+    draw_thin_line(c, PAGE_W / 2 - 50, cy + 75, PAGE_W / 2 + 50, cy + 75,
                    color=COLOR_NEGRO, width=0.6)
 
     c.setFont(SANS_REG, 12)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     sub = "Coleccion Regenerativa"
-    c.drawCentredString(PAGE_W / 2, cy + 35, sub)
+    c.drawCentredString(PAGE_W / 2, cy + 45, sub)
 
     c.setFont(SERIF_ITAL, 13)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, cy - 10, "Diseno consciente · Impreso aqui")
+    c.drawCentredString(PAGE_W / 2, cy - 40, "Diseno consciente · Impreso aqui")
 
-    draw_isotipo_hoja(c, PAGE_W / 2, cy - 80, 26, color=COLOR_VERDE)
+    draw_isotipo_hoja(c, PAGE_W / 2, cy - 130, 26, color=COLOR_VERDE)
 
     c.restoreState()
     draw_footer(c, page_num)
@@ -906,21 +1001,29 @@ def build_hero_product_page(c, elem, productos, page_num):
 
     img_path = get_image_path(elem, productos)
 
-    # Polaroid centrado. Header termina en y~785. Necesito gap de 30pt.
-    # Polaroid bot = 755, top = 755 - ph. ph=320 -> top=435. Demasiado alto.
-    # Mejor: ph=280, top=475, bot=755.
+    # Polaroid centrado. Area util: HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690.
+    # 2 secciones: polaroid arriba + info label abajo.
+    # Polaroid: 280pt de alto, info label: 200pt, gap 30pt, margen 60+60.
+    # Total: 280+200+30+60+60 = 630. OK.
     pw, ph = 300, 280
+    # Polaroid bot y: HEADER_BOTTOM - 30 (margen) = 720
+    # Polaroid top y: 720 + ph = 1000 (fuera!). Hay que usar polaroid bot menor.
+    # En realidad, ph=280, entonces polaroid top = polaroid bot + 280.
+    # Si polaroid bot = 720, top = 1000. Necesito polaroid bot menor.
+    # 750 (header bottom) - 280 (ph) = 470. Polaroid bot = 470. Top = 470+280=750. Justo.
+    pw, ph = 300, 260
+    py = HEADER_BOTTOM - 30 - ph  # 750-30-260 = 460
+    # Polaroid: bot 460, top 720. Gap con header: 30pt.
     px = (PAGE_W - pw) / 2
-    py = 470
 
     draw_product_card_scrapbook(c, px, py, pw, ph, prod, img_path,
                                  rot_photo=0, rot_label=0, max_desc_lines=4)
 
     # Info label centrado abajo (ancho completo)
     info_w = PAGE_W - 2 * MARGIN
-    info_h = 220
+    info_h = 200
     info_x = MARGIN
-    info_y = 70
+    info_y = FOOTER_TOP + 30  # 90
 
     draw_paper_label(c, info_x, info_y, info_w, info_h, rotation=0,
                      color=COLOR_CREMA_OSC, has_tape=True, tape_pos="top")
@@ -1003,11 +1106,12 @@ def build_grid_2x2(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 200, 290
+    pw, ph = 200, 280
     n = min(len(elementos), 2)
 
     gap = (PAGE_W - n * pw) / (n + 1)
-    top_y = PAGE_H - 145 - ph
+    # polaroid bot y = HEADER_BOTTOM - 30 = 720
+    top_y = HEADER_BOTTOM - 30 - ph  # 720-280 = 440
 
     rot_photos = [-0.4, 0.4]
     rot_labels = [0.3, -0.3]
@@ -1035,7 +1139,13 @@ def build_grid_2x2(c, elementos, productos, page_num, custom_palette_map=None):
 
 
 def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
-    """Portrait: 2 productos apilados verticalmente."""
+    """Portrait: 2 productos apilados verticalmente.
+
+    En coords reportlab (y crece hacia arriba):
+    HEADER_BOTTOM=750, FOOTER_TOP=60.
+    Polaroid va de y hasta y+ph. Etiqueta se calcula automaticamente por
+    draw_product_card_scrapbook (8pt debajo del polaroid).
+    """
     print(f"  Grid 1x2: {len(elementos)} productos (pág {page_num})")
 
     c.setFillColor(COLOR_MARFIL)
@@ -1044,19 +1154,91 @@ def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 340, 240
-    # 2 productos apilados. Margen desde header (y~85) y footer (y~40).
-    # Top polaroid y=540, bottom polaroid y=215
-    # Espacio disponible: 540-215 = 325 (incluye polaroid+etiqueta)
-    # Etiqueta va 80pt debajo del polaroid. Polaroid top->bottom: 240
-    # polaroid 1: y=540 a 780, etiqueta y=460 a 540
-    # polaroid 2: y=215 a 455, etiqueta y=135 a 215
-    polaroid_y_top = PAGE_H - 302
-    polaroid_y_bot = 215
+    pw = 320
+    ph = 220
+
+    # Layout: 2 bloques (polaroid + etiqueta 80pt = 300pt por bloque)
+    # + 1 gap entre bloques = 30pt
+    # Total: 2*300 + 30 = 630pt
+    # Disponible: HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690pt
+    # Margen: 60pt (30 arriba, 30 abajo)
+
+    # Bloque 1 (arriba): polaroid top y = HEADER_BOTTOM - 30 = 720
+    # polaroid bot y = 720 - ph = 500
+    p1_y = HEADER_BOTTOM - 30 - ph  # 500
+    # Bloque 2 (abajo): polaroid top y = FOOTER_TOP + 30 + label_h + 30 = 200
+    # polaroid bot y = 200 - ph = -20 (fuera!)
+    # Ajusto: polaroid 2 bot = FOOTER_TOP + 30 + label_h = 170
+    p2_y = FOOTER_TOP + 30 + 80  # 170
+    # Si p2_y < p1_y - ph - 80 (etiqueta 1) - 30 (gap), se solapan
+    # p1_y - ph = 280 (polaroid 1 top). Necesito polaroid 2 top > 280 + 80 + 30 = 390
+    # p2_y = 170 < 390. MAL.
+    # Reduzco ph.
+    ph = 180
+    p1_y = HEADER_BOTTOM - 30 - ph  # 540
+    p2_y = FOOTER_TOP + 30 + 80  # 170
+    # p1 top = 720, p1 bot = 540, p2 top = 350, p2 bot = 170
+    # Etiqueta 1 top = 540-8-80 = 452, bot = 532. Gap polaroid1_bot-eta1_top = 540-532=8
+    # Etiqueta 2 top = 170-8-80 = 82, bot = 162. Gap polaroid2_bot-eta2_top = 170-162=8
+    # Gap entre etiqueta1 bot (532) y polaroid2 top (350): NO, polaroid2 top = 350, etiqueta1 bot = 532
+    # Solapamiento: 532-350 = 182pt
+
+    # CALCULO CORRECTO:
+    # area_total = HEADER_BOTTOM - FOOTER_TOP - 2*gap_bloque_extremo = 750 - 60 - 60 = 630
+    # 2 bloques de 300pt (polaroid+etiqueta+gap_interno) = 600pt
+    # gap entre bloques = 30pt
+    # Total = 630pt. EXACTO.
+
+    # Coordenadas:
+    # bloque 1 (top): polaroid_top y = HEADER_BOTTOM - margen_top = 720
+    #   polaroid bot y = 720 - 180 = 540
+    #   etiqueta top y = polaroid_bot - gap_polaroid_etiqueta - label_h = 540 - 8 - 80 = 452
+    #   etiqueta bot y = 532
+    # gap entre bloques = 30
+    # bloque 2 (bot): etiqueta1 bot (532) + 30 (gap) = 562
+    #   polaroid top y = etiqueta2 bot + gap_polaroid_etiqueta = ?
+    # Voy de abajo hacia arriba:
+    #   etiqueta 2 bot y = FOOTER_TOP + margen_bot = 90
+    #   etiqueta 2 top y = 90 - 80 = 10
+    #   polaroid 2 bot y = 10 + gap(8) = 18
+    #   polaroid 2 top y = 18 + 180 = 198
+    #   etiqueta 1 bot y = polaroid 2 top - 30 (gap bloques) = 168
+    #   etiqueta 1 top y = 168 - 80 = 88
+    #   polaroid 1 bot y = 88 - 8 (gap_polaroid_etiqueta) = 80
+    #   polaroid 1 top y = 80 + 180 = 260
+    # Demasiado bajo. ph=180 es mucho.
+
+    # Recalculo con ph=160:
+    # bloque 1: polaroid top = 720, bot = 560
+    #   etiqueta top = 560-8-80 = 472, bot = 552
+    # gap = 30
+    # bloque 2: polaroid top = ?, bot = ?
+    #   etiqueta bot = 552 - 30 = 522... espera, etiqueta1 bot esta ARRIBA de polaroid2 top
+    #   El orden visual de arriba a abajo:
+    #     polaroid 1 (top), gap, etiqueta 1, gap, polaroid 2, gap, etiqueta 2
+    #   En coords reportlab (mayor y = mas arriba):
+    #     polaroid_1_top > polaroid_1_bot > ... > polaroid_2_bot
+
+    # Simplifico: layout vertical, 2 bloques
+    # Cada bloque = polaroid (ph) + etiqueta (80) + gap_interno (8) = ph + 88
+    # Gap entre bloques: 20
+    # Total: 2*(ph+88) + 20 = 2*ph + 196
+    # 2*ph + 196 = 690 - 60 (margenes) = 630
+    # 2*ph = 434, ph = 217
+    ph = 200  # un poco menos para tener margen
+
+    # polaroid 1: top y = HEADER_BOTTOM - 30 = 720, bot y = 720-200 = 520
+    p1_y = 720 - 200  # 520
+    # etiqueta 1: top y = 520 - 8 - 80 = 432, bot y = 512
+    # gap 20 entre etiqueta 1 bot (512) y polaroid 2 top
+    # polaroid 2: top y = 512 - 20 = 492, bot y = 492-200 = 292
+    p2_y = 492 - 200  # 292
+    # etiqueta 2: top y = 292 - 8 - 80 = 204, bot y = 284
+    # Verificar: etiqueta 2 bot (284) > FOOTER_TOP (60) + 30 margen = 90. OK.
 
     positions = [
-        ((PAGE_W - pw) / 2, polaroid_y_top, -0.3, 0.2, 3),
-        ((PAGE_W - pw) / 2, polaroid_y_bot, 0.3, -0.2, -3),
+        ((PAGE_W - pw) / 2, p1_y, -0.3, 0.2, 3),
+        ((PAGE_W - pw) / 2, p2_y, 0.3, -0.2, -3),
     ]
 
     for i, elem in enumerate(elementos[:2]):
@@ -1087,11 +1269,11 @@ def build_grid_1x3(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 340, 400
+    pw, ph = 340, 360
     n = min(len(elementos), 1)  # Solo 1 por pagina en portrait
 
     polaroid_x = (PAGE_W - pw) / 2
-    polaroid_y = PAGE_H - 145 - ph
+    polaroid_y = HEADER_BOTTOM - 30 - ph  # 750-30-360 = 360
 
     for i, elem in enumerate(elementos[:n]):
         prod = productos.get(elem["producto_id"])
@@ -1154,11 +1336,12 @@ def build_pla_page(c, page_num):
 
     draw_minimal_header(c)
 
-    # Etiqueta principal ocupa casi toda la pagina en portrait
+    # Etiqueta principal. Area util HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690
+    # Margenes: 30 arriba, 30 abajo. label_h = 630.
     label_w = PAGE_W - 2 * MARGIN
-    label_h = 600
+    label_h = 630
     label_x = MARGIN
-    label_y = 80
+    label_y = HEADER_BOTTOM - 30 - label_h  # 750-30-630 = 90
 
     draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
@@ -1222,20 +1405,22 @@ def build_compromiso_page(c, page_num):
 
     c.setFont(SCRIPT_REG, 30)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Nuestro Compromiso")
+    c.drawCentredString(PAGE_W / 2, 715, "Nuestro Compromiso")
 
     c.setFont(SANS_REG, 11)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "CONTIGO Y CON EL PLANETA")
+    c.drawCentredString(PAGE_W / 2, 695, "CONTIGO Y CON EL PLANETA")
 
-    draw_thin_line(c, PAGE_W / 2 - 50, PAGE_H - 165, PAGE_W / 2 + 50, PAGE_H - 165,
+    draw_thin_line(c, PAGE_W / 2 - 50, 680, PAGE_W / 2 + 50, 680,
                    color=COLOR_NEGRO, width=0.5)
 
-    # Box 1 - 10% conservacion
+    # Box 1 - 10% conservacion (arriba)
+    # Area: header_bottom(750) - 30 - titulo(40) = 680
+    # Box 1: top y = 660, bot y = 460 (h=200)
     box1_x = MARGIN + 10
-    box1_y = 350
+    box1_y = 460
     box1_w = PAGE_W - 2 * (MARGIN + 10)
-    box1_h = 180
+    box1_h = 200
 
     draw_paper_label(c, box1_x, box1_y, box1_w, box1_h, rotation=-0.3,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
@@ -1257,11 +1442,12 @@ def build_compromiso_page(c, page_num):
 
     c.restoreState()
 
-    # Box 2 - redes
+    # Box 2 - redes (abajo)
+    # Box 1 bot = 460. Gap 30. Box 2 top = 430. Box 2 bot = 230.
     box2_x = MARGIN + 20
-    box2_y = 110
+    box2_y = 230
     box2_w = PAGE_W - 2 * (MARGIN + 20)
-    box2_h = 180
+    box2_h = 200
 
     draw_paper_label(c, box2_x, box2_y, box2_w, box2_h, rotation=0.4,
                      color=COLOR_CREMA_OSC, has_tape=True, tape_pos="top")
@@ -1297,24 +1483,24 @@ def build_back_cover(c):
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45)
 
     # Logo y nombre arriba
-    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 130, 54, color=COLOR_VERDE)
+    draw_isotipo_hoja(c, PAGE_W / 2, 720, 50, color=COLOR_VERDE)
 
-    c.setFont(SCRIPT_REG, 68)
+    c.setFont(SCRIPT_REG, 64)
     c.setFillColor(COLOR_MORADO)
-    w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 68)
-    c.drawString((PAGE_W - w) / 2, PAGE_H - 200, "Yolitia")
+    w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 64)
+    c.drawString((PAGE_W - w) / 2, 645, "Yolitia")
 
     c.setFont(SANS_REG, 12)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     sub = "UN PROYECTO CIRCULAR"
     w = pdfmetrics.stringWidth(sub, SANS_REG, 12)
-    c.drawString((PAGE_W - w) / 2, PAGE_H - 230, sub)
+    c.drawString((PAGE_W - w) / 2, 615, sub)
 
     # Manifesto ocupa casi toda la pagina
     label_w = PAGE_W - 2 * MARGIN
     label_h = 480
     label_x = MARGIN
-    label_y = 100
+    label_y = 500 - label_h  # 20 (etiqueta top), bot=500
 
     draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
@@ -1352,12 +1538,7 @@ def build_back_cover(c):
 
     c.restoreState()
 
-    draw_washi_tape(c, PAGE_W / 2 - 110, 50, 220, 16, angle=-2)
-
-    c.setFont(SERIF_ITAL, 9)
-    c.setFillColor(COLOR_NEGRO)
-    c.drawCentredString(PAGE_W / 2, 60, "Diseno consciente · Impreso aqui")
-
+    draw_footer(c, 0)
     c.showPage()
 
 
