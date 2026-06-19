@@ -1059,15 +1059,30 @@ def build_hero_product_page(c, elem, productos, page_num):
     c.setFillColor(COLOR_MARRON)
     sku = elem.get("sku", "")
     cat_es = prod.get('categoria', '')
+    sub_es = prod.get('subcategoria', '')
     dy = text_y - 25
     c.drawString(col2_x, dy, f"SKU: {sku}")
-    c.drawString(col2_x, dy - 15, f"Categoria: {cat_es}")
-    c.drawString(col2_x, dy - 30, f"Material: {prod.get('material', 'PLA')}")
+    cat_text = f"Categoria: {cat_es}"
+    if sub_es:
+        cat_text += f" / {sub_es}"
+    # Wrap de la linea de categoria si es muy larga
+    cat_lines = []
+    if pdfmetrics.stringWidth(cat_text, SERIF_ITAL, 9) > 145:
+        # Partir por subcategoria en su propia linea
+        c.drawString(col2_x, dy - 15, f"Categoria: {cat_es}")
+        if sub_es:
+            c.drawString(col2_x, dy - 28, f"Tipo: {sub_es}")
+            c.drawString(col2_x, dy - 41, f"Material: {prod.get('material', 'PLA')}")
+        else:
+            c.drawString(col2_x, dy - 28, f"Material: {prod.get('material', 'PLA')}")
+    else:
+        c.drawString(col2_x, dy - 15, cat_text)
+        c.drawString(col2_x, dy - 30, f"Material: {prod.get('material', 'PLA')}")
 
     # Columna 3: Descripcion corta
     c.setFont(SANS_BOLD, 10)
     c.setFillColor(COLOR_MORADO)
-    c.drawRightString(col3_x, text_y, "NOTAS")
+    c.drawString(col3_x - 110, text_y, "NOTAS")
     c.setFont(SERIF_ITAL, 8.5)
     c.setFillColor(COLOR_MARRON)
     desc = prod["_display_desc"]
@@ -1075,7 +1090,7 @@ def build_hero_product_page(c, elem, productos, page_num):
     words = desc.split()
     lines = []
     current_line = ""
-    max_w = (col3_x - col2_x) - 30
+    max_w = 115
     for word in words:
         test_line = current_line + " " + word if current_line else word
         if pdfmetrics.stringWidth(test_line, SERIF_ITAL, 8.5) < max_w:
@@ -1087,7 +1102,7 @@ def build_hero_product_page(c, elem, productos, page_num):
         lines.append(current_line)
     ly = text_y - 25
     for line in lines[:6]:
-        c.drawRightString(col3_x, ly, line)
+        c.drawString(col3_x - 110, ly, line)
         ly -= 12
 
     c.restoreState()
