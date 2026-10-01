@@ -13,6 +13,10 @@ output/
 output/*
 !output/ugc/
 
+# Respaldos del catálogo (los genera scripts/respaldar.ps1).
+# Son copias de lo que ya está versionado o de datos pesados: no van al repo.
+respaldos/
+
 # Fotos de ORIGEN sin procesar: vienen de MakerWorld con licencia que prohibe
 # distribuirlas. Este repo es publico, asi que quedan fuera SIEMPRE.
 assets/_incoming/

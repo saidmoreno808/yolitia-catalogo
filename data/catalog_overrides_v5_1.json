@@ -1,0 +1,15 @@
+{
+  "_comment": "Overrides v5.1 — Solo se ajustan nombre/descripción/precio de los aretes YOL-002 y YOL-003 tomando como referencia v8. El resto se mantiene idéntico a v5.",
+  "renames": {
+    "YOL-002": "Aretes Serpiente de Seda",
+    "YOL-003": "Aretes Nodo Infinito de Amor"
+  },
+  "descriptions": {
+    "YOL-002": "ARETES DE SERPIENTES ENTRELAZADAS CON POSTES DE GANCHO Y ACABADO MATE SUAVE. LIGEROS PARA USO DIARIO.",
+    "YOL-003": "ARETES DE BOTÓN CON SÍMBOLO DE NUDO INFINITO. REPRESENTAN AMOR Y CONEXIÓN ETERNA EN UNA SOLA PIEZA."
+  },
+  "prices": {
+    "YOL-002": 30,
+    "YOL-003": 30
+  }
+}

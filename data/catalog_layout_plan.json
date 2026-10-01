@@ -2,8 +2,8 @@
   "metadata": {
     "marca": "Yolitia",
     "version": "1.0",
-    "fecha_creacion": "2026-06-18T02:01:47.962702",
-    "total_paginas": 72,
+    "fecha_creacion": "2026-06-19T17:24:50.323803",
+    "total_paginas": 86,
     "total_productos_catalogados": 134
   },
   "identidad_visual": {
@@ -91,7 +91,7 @@
       "numero_pagina_display": "3",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -118,9 +118,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 4,
+      "numero_pagina_display": "4",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-009",
           "sku": "YOL-JOY-009",
           "nombre_yolitia": "Aretes Hongo del Bosque",
@@ -133,7 +144,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-010",
           "sku": "YOL-JOY-010",
           "nombre_yolitia": "Aretes Esqueleto de Gato",
@@ -146,15 +157,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 4,
-      "numero_pagina_display": "4",
+      "pagina_numero": 5,
+      "numero_pagina_display": "5",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -181,9 +192,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 6,
+      "numero_pagina_display": "6",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-014",
           "sku": "YOL-JOY-014",
           "nombre_yolitia": "Aretes Telaraña de Amor",
@@ -196,7 +218,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-015",
           "sku": "YOL-JOY-015",
           "nombre_yolitia": "Aretes Grito",
@@ -209,15 +231,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 5,
-      "numero_pagina_display": "5",
+      "pagina_numero": 7,
+      "numero_pagina_display": "7",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -244,9 +266,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 8,
+      "numero_pagina_display": "8",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-018",
           "sku": "YOL-JOY-018",
           "nombre_yolitia": "Aretes Barco de Papel",
@@ -259,7 +292,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-019",
           "sku": "YOL-JOY-019",
           "nombre_yolitia": "Aretes Gatito",
@@ -272,15 +305,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 6,
-      "numero_pagina_display": "6",
+      "pagina_numero": 9,
+      "numero_pagina_display": "9",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -307,9 +340,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 10,
+      "numero_pagina_display": "10",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 3,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-023",
           "sku": "YOL-JOY-023",
           "nombre_yolitia": "Aretes Mariposa",
@@ -322,7 +366,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-024",
           "sku": "YOL-JOY-024",
           "nombre_yolitia": "Aretes Patita",
@@ -333,17 +377,30 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
+        },
+        {
+          "posicion": 3,
+          "producto_id": "YOL-022",
+          "sku": "YOL-JOY-022",
+          "nombre_yolitia": "Corazón de Movimiento Eterno",
+          "subcategoria": "Aretes",
+          "imagen_filename": "YOL-022_principal_01.jpg",
+          "imagen_ruta": "assets/images/productos/YOL-022/YOL-022_principal_01.jpg",
+          "material": "PLA",
+          "descripcion_corta": null,
+          "es_hero": false,
+          "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 3 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 7,
-      "numero_pagina_display": "7",
+      "pagina_numero": 11,
+      "numero_pagina_display": "11",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -370,9 +427,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 12,
+      "numero_pagina_display": "12",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-027",
           "sku": "YOL-JOY-027",
           "nombre_yolitia": "Aretes Araña Colgante",
@@ -385,7 +453,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-028",
           "sku": "YOL-JOY-028",
           "nombre_yolitia": "Aretes Luna y Gato",
@@ -398,15 +466,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 8,
-      "numero_pagina_display": "8",
+      "pagina_numero": 13,
+      "numero_pagina_display": "13",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -433,9 +501,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 14,
+      "numero_pagina_display": "14",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-031",
           "sku": "YOL-JOY-031",
           "nombre_yolitia": "Aretes Corazón Tejido",
@@ -448,7 +527,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-032",
           "sku": "YOL-JOY-032",
           "nombre_yolitia": "Aretes Mandala Laberinto",
@@ -461,15 +540,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 9,
-      "numero_pagina_display": "9",
+      "pagina_numero": 15,
+      "numero_pagina_display": "15",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 4,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -496,9 +575,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 16,
+      "numero_pagina_display": "16",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 2,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-035",
           "sku": "YOL-JOY-035",
           "nombre_yolitia": "Aretes Gran Ola de Kanagawa",
@@ -511,7 +601,7 @@
           "destacado": false
         },
         {
-          "posicion": 4,
+          "posicion": 2,
           "producto_id": "YOL-104",
           "sku": "YOL-JOY-104",
           "nombre_yolitia": "Organizador Joyero Árbol",
@@ -524,15 +614,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 4 producto(s)"
+      "notas": "Grid 2x2: 2 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 10,
-      "numero_pagina_display": "10",
+      "pagina_numero": 17,
+      "numero_pagina_display": "17",
       "categoria": "Joyería & Accesorios",
       "grid": "2x2",
-      "num_productos": 3,
+      "num_productos": 2,
       "elementos": [
         {
           "posicion": 1,
@@ -559,9 +649,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 2x2: 2 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 18,
+      "numero_pagina_display": "18",
+      "categoria": "Joyería & Accesorios",
+      "grid": "2x2",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-156",
           "sku": "YOL-JOY-156",
           "nombre_yolitia": "Joyero Ciervo",
@@ -574,12 +675,12 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 2x2: 3 producto(s)"
+      "notas": "Grid 2x2: 1 producto(s)"
     },
     {
       "tipo": "separador_categoria",
-      "pagina_numero": 11,
-      "numero_pagina_display": "11",
+      "pagina_numero": 19,
+      "numero_pagina_display": "19",
       "categoria": "Hogar & Decoración",
       "orden_categoria": 2,
       "total_categorias": 5,
@@ -588,8 +689,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 12,
-      "numero_pagina_display": "12",
+      "pagina_numero": 20,
+      "numero_pagina_display": "20",
       "categoria": "Hogar & Decoración",
       "grid": "1x1",
       "num_productos": 1,
@@ -612,8 +713,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 13,
-      "numero_pagina_display": "13",
+      "pagina_numero": 21,
+      "numero_pagina_display": "21",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -649,8 +750,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 14,
-      "numero_pagina_display": "14",
+      "pagina_numero": 22,
+      "numero_pagina_display": "22",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -686,8 +787,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 15,
-      "numero_pagina_display": "15",
+      "pagina_numero": 23,
+      "numero_pagina_display": "23",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -723,8 +824,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 16,
-      "numero_pagina_display": "16",
+      "pagina_numero": 24,
+      "numero_pagina_display": "24",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -760,8 +861,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 17,
-      "numero_pagina_display": "17",
+      "pagina_numero": 25,
+      "numero_pagina_display": "25",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -797,8 +898,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 18,
-      "numero_pagina_display": "18",
+      "pagina_numero": 26,
+      "numero_pagina_display": "26",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -834,8 +935,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 19,
-      "numero_pagina_display": "19",
+      "pagina_numero": 27,
+      "numero_pagina_display": "27",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -871,8 +972,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 20,
-      "numero_pagina_display": "20",
+      "pagina_numero": 28,
+      "numero_pagina_display": "28",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -908,8 +1009,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 21,
-      "numero_pagina_display": "21",
+      "pagina_numero": 29,
+      "numero_pagina_display": "29",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -945,8 +1046,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 22,
-      "numero_pagina_display": "22",
+      "pagina_numero": 30,
+      "numero_pagina_display": "30",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -982,8 +1083,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 23,
-      "numero_pagina_display": "23",
+      "pagina_numero": 31,
+      "numero_pagina_display": "31",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1019,8 +1120,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 24,
-      "numero_pagina_display": "24",
+      "pagina_numero": 32,
+      "numero_pagina_display": "32",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1056,8 +1157,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 25,
-      "numero_pagina_display": "25",
+      "pagina_numero": 33,
+      "numero_pagina_display": "33",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1093,8 +1194,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 26,
-      "numero_pagina_display": "26",
+      "pagina_numero": 34,
+      "numero_pagina_display": "34",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1130,8 +1231,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 27,
-      "numero_pagina_display": "27",
+      "pagina_numero": 35,
+      "numero_pagina_display": "35",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1167,8 +1268,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 28,
-      "numero_pagina_display": "28",
+      "pagina_numero": 36,
+      "numero_pagina_display": "36",
       "categoria": "Hogar & Decoración",
       "grid": "1x2",
       "num_productos": 2,
@@ -1204,8 +1305,8 @@
     },
     {
       "tipo": "separador_categoria",
-      "pagina_numero": 29,
-      "numero_pagina_display": "29",
+      "pagina_numero": 37,
+      "numero_pagina_display": "37",
       "categoria": "Organización",
       "orden_categoria": 3,
       "total_categorias": 5,
@@ -1214,8 +1315,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 30,
-      "numero_pagina_display": "30",
+      "pagina_numero": 38,
+      "numero_pagina_display": "38",
       "categoria": "Organización",
       "grid": "1x1",
       "num_productos": 1,
@@ -1238,8 +1339,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 31,
-      "numero_pagina_display": "31",
+      "pagina_numero": 39,
+      "numero_pagina_display": "39",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1275,8 +1376,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 32,
-      "numero_pagina_display": "32",
+      "pagina_numero": 40,
+      "numero_pagina_display": "40",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1312,8 +1413,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 33,
-      "numero_pagina_display": "33",
+      "pagina_numero": 41,
+      "numero_pagina_display": "41",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1349,8 +1450,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 34,
-      "numero_pagina_display": "34",
+      "pagina_numero": 42,
+      "numero_pagina_display": "42",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1386,8 +1487,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 35,
-      "numero_pagina_display": "35",
+      "pagina_numero": 43,
+      "numero_pagina_display": "43",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1423,8 +1524,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 36,
-      "numero_pagina_display": "36",
+      "pagina_numero": 44,
+      "numero_pagina_display": "44",
       "categoria": "Organización",
       "grid": "1x2",
       "num_productos": 2,
@@ -1460,8 +1561,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 37,
-      "numero_pagina_display": "37",
+      "pagina_numero": 45,
+      "numero_pagina_display": "45",
       "categoria": "Organización",
       "grid": "1x1",
       "num_productos": 1,
@@ -1484,8 +1585,8 @@
     },
     {
       "tipo": "separador_categoria",
-      "pagina_numero": 38,
-      "numero_pagina_display": "38",
+      "pagina_numero": 46,
+      "numero_pagina_display": "46",
       "categoria": "Entretenimiento",
       "orden_categoria": 4,
       "total_categorias": 5,
@@ -1494,8 +1595,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 39,
-      "numero_pagina_display": "39",
+      "pagina_numero": 47,
+      "numero_pagina_display": "47",
       "categoria": "Entretenimiento",
       "grid": "1x1",
       "num_productos": 1,
@@ -1518,11 +1619,11 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 40,
-      "numero_pagina_display": "40",
+      "pagina_numero": 48,
+      "numero_pagina_display": "48",
       "categoria": "Entretenimiento",
       "grid": "1x3",
-      "num_productos": 3,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
@@ -1536,9 +1637,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 49,
+      "numero_pagina_display": "49",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 2,
+          "posicion": 1,
           "producto_id": "YOL-036",
           "sku": "YOL-ENT-036",
           "nombre_yolitia": "Interruptor Fidget",
@@ -1549,9 +1661,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 50,
+      "numero_pagina_display": "50",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-039",
           "sku": "YOL-ENT-039",
           "nombre_yolitia": "Llavero Guante de Béisbol",
@@ -1564,15 +1687,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x3: 3 producto(s)"
+      "notas": "Grid 1x3: 1 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 41,
-      "numero_pagina_display": "41",
+      "pagina_numero": 51,
+      "numero_pagina_display": "51",
       "categoria": "Entretenimiento",
       "grid": "1x3",
-      "num_productos": 3,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
@@ -1586,9 +1709,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 52,
+      "numero_pagina_display": "52",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 2,
+          "posicion": 1,
           "producto_id": "YOL-065",
           "sku": "YOL-ENT-065",
           "nombre_yolitia": "Fidget Swoosh",
@@ -1599,9 +1733,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 53,
+      "numero_pagina_display": "53",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-097",
           "sku": "YOL-ENT-097",
           "nombre_yolitia": "Rompecabezas ABC Elasmosaurio",
@@ -1614,15 +1759,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x3: 3 producto(s)"
+      "notas": "Grid 1x3: 1 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 42,
-      "numero_pagina_display": "42",
+      "pagina_numero": 54,
+      "numero_pagina_display": "54",
       "categoria": "Entretenimiento",
       "grid": "1x3",
-      "num_productos": 3,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
@@ -1636,9 +1781,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 55,
+      "numero_pagina_display": "55",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 2,
+          "posicion": 1,
           "producto_id": "YOL-124",
           "sku": "YOL-ENT-124",
           "nombre_yolitia": "Llavero Game Boy",
@@ -1649,9 +1805,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 56,
+      "numero_pagina_display": "56",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-131",
           "sku": "YOL-ENT-131",
           "nombre_yolitia": "Rompecabezas Fracciones",
@@ -1664,15 +1831,15 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x3: 3 producto(s)"
+      "notas": "Grid 1x3: 1 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 43,
-      "numero_pagina_display": "43",
+      "pagina_numero": 57,
+      "numero_pagina_display": "57",
       "categoria": "Entretenimiento",
       "grid": "1x3",
-      "num_productos": 3,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
@@ -1686,9 +1853,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 58,
+      "numero_pagina_display": "58",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 2,
+          "posicion": 1,
           "producto_id": "YOL-155",
           "sku": "YOL-ENT-155",
           "nombre_yolitia": "Rompecabezas Animales África",
@@ -1699,9 +1877,20 @@
           "descripcion_corta": null,
           "es_hero": false,
           "destacado": false
-        },
+        }
+      ],
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "productos",
+      "pagina_numero": 59,
+      "numero_pagina_display": "59",
+      "categoria": "Entretenimiento",
+      "grid": "1x3",
+      "num_productos": 1,
+      "elementos": [
         {
-          "posicion": 3,
+          "posicion": 1,
           "producto_id": "YOL-158",
           "sku": "YOL-ENT-158",
           "nombre_yolitia": "Rompecabezas Animales",
@@ -1714,12 +1903,84 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x3: 3 producto(s)"
+      "notas": "Grid 1x3: 1 producto(s)"
+    },
+    {
+      "tipo": "landmarks",
+      "pagina_numero": 60,
+      "numero_pagina_display": "60",
+      "categoria": "Lugares del Mundo",
+      "elementos": [
+        {
+          "producto_id": "YOL-061"
+        },
+        {
+          "producto_id": "YOL-066"
+        }
+      ],
+      "notas": "Lugares del Mundo: 2 lugar(es)"
+    },
+    {
+      "tipo": "landmarks",
+      "pagina_numero": 61,
+      "numero_pagina_display": "61",
+      "categoria": "Lugares del Mundo",
+      "elementos": [
+        {
+          "producto_id": "YOL-067"
+        },
+        {
+          "producto_id": "YOL-069"
+        }
+      ],
+      "notas": "Lugares del Mundo: 2 lugar(es)"
+    },
+    {
+      "tipo": "landmarks",
+      "pagina_numero": 62,
+      "numero_pagina_display": "62",
+      "categoria": "Lugares del Mundo",
+      "elementos": [
+        {
+          "producto_id": "YOL-070"
+        },
+        {
+          "producto_id": "YOL-071"
+        }
+      ],
+      "notas": "Lugares del Mundo: 2 lugar(es)"
+    },
+    {
+      "tipo": "landmarks",
+      "pagina_numero": 63,
+      "numero_pagina_display": "63",
+      "categoria": "Lugares del Mundo",
+      "elementos": [
+        {
+          "producto_id": "YOL-072"
+        },
+        {
+          "producto_id": "YOL-073"
+        }
+      ],
+      "notas": "Lugares del Mundo: 2 lugar(es)"
+    },
+    {
+      "tipo": "landmarks",
+      "pagina_numero": 64,
+      "numero_pagina_display": "64",
+      "categoria": "Lugares del Mundo",
+      "elementos": [
+        {
+          "producto_id": "YOL-074"
+        }
+      ],
+      "notas": "Lugares del Mundo: 1 lugar(es)"
     },
     {
       "tipo": "separador_categoria",
-      "pagina_numero": 44,
-      "numero_pagina_display": "44",
+      "pagina_numero": 65,
+      "numero_pagina_display": "65",
       "categoria": "Regalos & Coleccionables",
       "orden_categoria": 5,
       "total_categorias": 5,
@@ -1728,8 +1989,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 45,
-      "numero_pagina_display": "45",
+      "pagina_numero": 66,
+      "numero_pagina_display": "66",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x1",
       "num_productos": 1,
@@ -1752,27 +2013,14 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 46,
-      "numero_pagina_display": "46",
+      "pagina_numero": 67,
+      "numero_pagina_display": "67",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
-      "num_productos": 2,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
-          "producto_id": "YOL-022",
-          "sku": "YOL-REG-022",
-          "nombre_yolitia": "Corazón de Movimiento Eterno",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-022_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-022/YOL-022_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
           "producto_id": "YOL-051",
           "sku": "YOL-REG-051",
           "nombre_yolitia": "Nacimiento Iluminado",
@@ -1785,31 +2033,18 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x2: 2 producto(s)"
+      "notas": "Grid 1x2: 1 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 47,
-      "numero_pagina_display": "47",
+      "pagina_numero": 68,
+      "numero_pagina_display": "68",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
-      "num_productos": 2,
+      "num_productos": 1,
       "elementos": [
         {
           "posicion": 1,
-          "producto_id": "YOL-061",
-          "sku": "YOL-REG-061",
-          "nombre_yolitia": "Popocatepetl Mexico City Volcano Topographic Map",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-061_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-061/YOL-061_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
           "producto_id": "YOL-062",
           "sku": "YOL-REG-062",
           "nombre_yolitia": "Topper Graduación 2026",
@@ -1822,160 +2057,12 @@
           "destacado": false
         }
       ],
-      "notas": "Grid 1x2: 2 producto(s)"
+      "notas": "Grid 1x2: 1 producto(s)"
     },
     {
       "tipo": "productos",
-      "pagina_numero": 48,
-      "numero_pagina_display": "48",
-      "categoria": "Regalos & Coleccionables",
-      "grid": "1x2",
-      "num_productos": 2,
-      "elementos": [
-        {
-          "posicion": 1,
-          "producto_id": "YOL-066",
-          "sku": "YOL-REG-066",
-          "nombre_yolitia": "Pirámide Maya",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-066_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-066/YOL-066_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
-          "producto_id": "YOL-067",
-          "sku": "YOL-REG-067",
-          "nombre_yolitia": "Pirámide Chichén Itzá",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-067_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-067/YOL-067_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        }
-      ],
-      "notas": "Grid 1x2: 2 producto(s)"
-    },
-    {
-      "tipo": "productos",
-      "pagina_numero": 49,
-      "numero_pagina_display": "49",
-      "categoria": "Regalos & Coleccionables",
-      "grid": "1x2",
-      "num_productos": 2,
-      "elementos": [
-        {
-          "posicion": 1,
-          "producto_id": "YOL-069",
-          "sku": "YOL-REG-069",
-          "nombre_yolitia": "Cristo Redentor",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-069_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-069/YOL-069_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
-          "producto_id": "YOL-070",
-          "sku": "YOL-REG-070",
-          "nombre_yolitia": "Catedral de Florencia",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-070_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-070/YOL-070_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        }
-      ],
-      "notas": "Grid 1x2: 2 producto(s)"
-    },
-    {
-      "tipo": "productos",
-      "pagina_numero": 50,
-      "numero_pagina_display": "50",
-      "categoria": "Regalos & Coleccionables",
-      "grid": "1x2",
-      "num_productos": 2,
-      "elementos": [
-        {
-          "posicion": 1,
-          "producto_id": "YOL-071",
-          "sku": "YOL-REG-071",
-          "nombre_yolitia": "Gran Muralla China",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-071_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-071/YOL-071_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
-          "producto_id": "YOL-072",
-          "sku": "YOL-REG-072",
-          "nombre_yolitia": "Pirámides de Giza",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-072_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-072/YOL-072_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": null,
-          "es_hero": false,
-          "destacado": false
-        }
-      ],
-      "notas": "Grid 1x2: 2 producto(s)"
-    },
-    {
-      "tipo": "productos",
-      "pagina_numero": 51,
-      "numero_pagina_display": "51",
-      "categoria": "Regalos & Coleccionables",
-      "grid": "1x2",
-      "num_productos": 2,
-      "elementos": [
-        {
-          "posicion": 1,
-          "producto_id": "YOL-073",
-          "sku": "YOL-REG-073",
-          "nombre_yolitia": "Partenón",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-073_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-073/YOL-073_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
-          "es_hero": false,
-          "destacado": false
-        },
-        {
-          "posicion": 2,
-          "producto_id": "YOL-074",
-          "sku": "YOL-REG-074",
-          "nombre_yolitia": "Castillo de Chichén Itzá",
-          "subcategoria": "Coleccionables",
-          "imagen_filename": "YOL-074_principal_01.jpg",
-          "imagen_ruta": "assets/images/productos/YOL-074/YOL-074_principal_01.jpg",
-          "material": "PLA",
-          "descripcion_corta": "Disponible únicamente en color blanco o negro matte",
-          "es_hero": false,
-          "destacado": false
-        }
-      ],
-      "notas": "Grid 1x2: 2 producto(s)"
-    },
-    {
-      "tipo": "productos",
-      "pagina_numero": 52,
-      "numero_pagina_display": "52",
+      "pagina_numero": 69,
+      "numero_pagina_display": "69",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2011,8 +2098,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 53,
-      "numero_pagina_display": "53",
+      "pagina_numero": 70,
+      "numero_pagina_display": "70",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2048,8 +2135,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 54,
-      "numero_pagina_display": "54",
+      "pagina_numero": 71,
+      "numero_pagina_display": "71",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2085,8 +2172,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 55,
-      "numero_pagina_display": "55",
+      "pagina_numero": 72,
+      "numero_pagina_display": "72",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2122,8 +2209,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 56,
-      "numero_pagina_display": "56",
+      "pagina_numero": 73,
+      "numero_pagina_display": "73",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2159,8 +2246,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 57,
-      "numero_pagina_display": "57",
+      "pagina_numero": 74,
+      "numero_pagina_display": "74",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2196,8 +2283,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 58,
-      "numero_pagina_display": "58",
+      "pagina_numero": 75,
+      "numero_pagina_display": "75",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2233,8 +2320,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 59,
-      "numero_pagina_display": "59",
+      "pagina_numero": 76,
+      "numero_pagina_display": "76",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2270,8 +2357,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 60,
-      "numero_pagina_display": "60",
+      "pagina_numero": 77,
+      "numero_pagina_display": "77",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2307,8 +2394,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 61,
-      "numero_pagina_display": "61",
+      "pagina_numero": 78,
+      "numero_pagina_display": "78",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2344,8 +2431,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 62,
-      "numero_pagina_display": "62",
+      "pagina_numero": 79,
+      "numero_pagina_display": "79",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2381,8 +2468,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 63,
-      "numero_pagina_display": "63",
+      "pagina_numero": 80,
+      "numero_pagina_display": "80",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2418,8 +2505,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 64,
-      "numero_pagina_display": "64",
+      "pagina_numero": 81,
+      "numero_pagina_display": "81",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2455,8 +2542,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 65,
-      "numero_pagina_display": "65",
+      "pagina_numero": 82,
+      "numero_pagina_display": "82",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x2",
       "num_productos": 2,
@@ -2492,8 +2579,8 @@
     },
     {
       "tipo": "productos",
-      "pagina_numero": 66,
-      "numero_pagina_display": "66",
+      "pagina_numero": 83,
+      "numero_pagina_display": "83",
       "categoria": "Regalos & Coleccionables",
       "grid": "1x1",
       "num_productos": 1,
@@ -2516,22 +2603,22 @@
     },
     {
       "tipo": "material_pla",
-      "pagina_numero": 67,
-      "numero_pagina_display": "67",
+      "pagina_numero": 84,
+      "numero_pagina_display": "84",
       "elementos": [],
       "notas": "Seccion PLA: 'HECHO DE PLA — Bello por dentro y por fuera'"
     },
     {
       "tipo": "colores",
-      "pagina_numero": 68,
-      "numero_pagina_display": "68",
+      "pagina_numero": 85,
+      "numero_pagina_display": "85",
       "elementos": [],
       "notas": "Colores disponibles para los modelos"
     },
     {
       "tipo": "compromiso",
-      "pagina_numero": 69,
-      "numero_pagina_display": "69",
+      "pagina_numero": 86,
+      "numero_pagina_display": "86",
       "elementos": [],
       "notas": "Compromiso ambiental: 10% ganancias a conservacion + redes sociales"
     },

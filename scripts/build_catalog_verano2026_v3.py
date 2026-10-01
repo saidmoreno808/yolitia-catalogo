@@ -1,14 +1,14 @@
 """
-Catálogo Yolitia v9 — Vertical (portrait) · ESPAÑOL
-Basado en v8 (landscape). Cambio de orientación: A4 vertical (210x297 mm).
-Reorganización de grids: 1x1 hero, 1x2 vertical, 2x2 ahora 2x2 vertical.
+Catálogo Yolitia Verano2026 v3 — Horizontal · ESPAÑOL
+Versión basada en v8 (horizontal) con correcciones de nombres y precios.
+Solo cambios solicitados: ORGANIZADOR DE PARED $280, LLAVERO GYM $80, Lugares del Mundo integrados.
 """
 
 import json
 import math
 from pathlib import Path
 
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import landscape, A4
 from reportlab.lib.units import mm
 from reportlab.lib import colors
 from reportlab.pdfgen import canvas
@@ -25,8 +25,8 @@ IMAGES_DIR = BASE_DIR / "assets" / "images" / "productos"
 OUTPUT_DIR = BASE_DIR / "output"
 LAYOUT_FILE = DATA_DIR / "catalog_layout_plan.json"
 JSON_FILE = DATA_DIR / "yolitia_products_database.json"
-OVERRIDES_FILE = DATA_DIR / "catalog_overrides_v8.json"
-OUTPUT_PDF = OUTPUT_DIR / "catalogo_yolitia_v9.pdf"
+OVERRIDES_FILE = DATA_DIR / "catalog_overrides_verano2026_v3.json"
+OUTPUT_PDF = OUTPUT_DIR / "finales" / "catalogo_yolitia_Verano2026_v3.pdf"
 
 
 # ============================================================================
@@ -77,35 +77,9 @@ def register_fonts():
 # ============================================================================
 # PÁGINA
 # ============================================================================
-# reportlab usa coordenadas cartesianas con origen en la esquina INFERIOR-IZQUIERDA.
-# PAGE_H = 842 (A4 portrait vertical).
-# Para evitar confusion, definimos zonas en terminos de "y desde el FONDO":
-PAGE_W, PAGE_H = A4  # 595 x 842 pt (210x297 mm portrait)
-MARGIN = 36
+PAGE_W, PAGE_H = landscape(A4)
+MARGIN = 40
 CONTENT_W = PAGE_W - (2 * MARGIN)
-
-# Zonas verticales (todas en coords "y desde el FONDO"):
-# En reportlab y crece hacia arriba. PAGE_H=842.
-# Header: isotopo y=820, script baseline y=786, linea y=762. El header ocupa hasta y~755.
-# Contenido: y entre 750 (debajo del header) y 60 (arriba del footer).
-PAGE_BOTTOM = 0
-PAGE_TOP = PAGE_H
-FOOTER_TOP = 60   # el footer arranca en y=60 (todo lo de abajo esta reservado)
-HEADER_BOTTOM = 750  # el header termina en y=750 (todo lo de abajo esta disponible)
-CONTENT_AREA_BOTTOM = FOOTER_TOP + 8  # 68: margen antes del footer
-CONTENT_AREA_TOP = HEADER_BOTTOM  # 750
-CONTENT_AREA_HEIGHT = CONTENT_AREA_TOP - CONTENT_AREA_BOTTOM  # ~682pt
-
-
-# Helper: convierte "y desde el top" a "y desde el fondo" (coords reportlab)
-def y_from_top(y_top: float) -> float:
-    """y_top = 0 en el borde superior; retorna y en coords reportlab."""
-    return PAGE_H - y_top
-
-
-# Helper: convierte "y desde el fondo" a "y desde el top" (visual)
-def y_from_bottom(y_bot: float) -> float:
-    return PAGE_H - y_bot
 
 
 # ============================================================================
@@ -151,7 +125,6 @@ def wrap_text_with_breaks(text, font, font_size, max_width, max_lines=None):
 # ============================================================================
 
 def draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45):
-    """Manchas decorativas en las esquinas (orientacion portrait)."""
     c.saveState()
     c.setStrokeColor(color)
     c.setFillColor(color)
@@ -159,21 +132,19 @@ def draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45):
     c.setFillAlpha(opacity)
     c.setLineWidth(0.8)
 
-    # Esquina superior izquierda
     p = c.beginPath()
-    p.moveTo(-50, PAGE_H + 30)
-    p.curveTo(40, PAGE_H - 80, 130, PAGE_H - 240, 80, PAGE_H - 380)
-    p.curveTo(30, PAGE_H - 480, -30, PAGE_H - 560, -50, PAGE_H - 620)
-    p.lineTo(-50, PAGE_H + 30)
+    p.moveTo(-50, 0)
+    p.curveTo(60, 80, 140, 200, 80, 320)
+    p.curveTo(20, 420, -40, 480, -50, 520)
+    p.lineTo(-50, 0)
     p.close()
     c.drawPath(p, stroke=0, fill=1)
 
-    # Esquina inferior derecha
     p = c.beginPath()
-    p.moveTo(PAGE_W + 30, -30)
-    p.curveTo(PAGE_W - 60, 80, PAGE_W - 180, 220, PAGE_W - 100, 360)
-    p.curveTo(PAGE_W - 40, 480, PAGE_W + 10, 560, PAGE_W + 30, 620)
-    p.lineTo(PAGE_W + 30, -30)
+    p.moveTo(PAGE_W + 30, PAGE_H)
+    p.curveTo(PAGE_W - 60, PAGE_H - 100, PAGE_W - 180, PAGE_H - 220, PAGE_W - 100, PAGE_H - 360)
+    p.curveTo(PAGE_W - 40, PAGE_H - 480, PAGE_W + 10, PAGE_H - 560, PAGE_W + 30, PAGE_H - 600)
+    p.lineTo(PAGE_W + 30, PAGE_H)
     p.close()
     c.drawPath(p, stroke=0, fill=1)
 
@@ -322,50 +293,13 @@ def fit_image_in_box(c, img_path, box_x, box_y, box_w, box_h):
         print(f"    Error imagen {img_path}: {e}")
 
 
-def fit_image_in_box_cover(c, img_path, box_x, box_y, box_w, box_h):
-    """Como fit_image_in_box pero la imagen LLENA el area (puede recortarse).
-    Util para landmarks con imagenes pequenas que deben verse grandes.
-    """
-    try:
-        img = ImageReader(img_path)
-        iw, ih = img.getSize()
-        ratio = iw / ih
-        box_ratio = box_w / box_h
-        if ratio > box_ratio:
-            # imagen mas ancha: limitamos por alto
-            h = box_h
-            w = box_h * ratio
-        else:
-            # imagen mas alta: limitamos por ancho
-            w = box_w
-            h = box_w / ratio
-        x = box_x + (box_w - w) / 2
-        y = box_y + (box_h - h) / 2
-        # Fondo blanco para areas vacias del box
-        c.setFillColorRGB(0.95, 0.94, 0.91)
-        c.rect(box_x, box_y, box_w, box_h, fill=1, stroke=0)
-        c.drawImage(img_path, x, y, width=w, height=h,
-                   preserveAspectRatio=True, mask='auto')
-    except Exception as e:
-        print(f"    Error imagen {img_path}: {e}")
-
-
 # ============================================================================
 # OVERRIDES
 # ============================================================================
 
 def load_overrides():
-    if OVERRIDES_FILE.exists():
-        with open(OVERRIDES_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    # Fallback: buscar el overrides mas reciente disponible
-    for cand in sorted(DATA_DIR.glob("catalog_overrides_*.json"), reverse=True):
-        try:
-            with open(cand, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            continue
-    return {}
+    with open(OVERRIDES_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def apply_overrides(productos, overrides):
@@ -404,41 +338,31 @@ def apply_overrides(productos, overrides):
 # ============================================================================
 
 def draw_minimal_header(c, subtitle="CATÁLOGO DE PRODUCTOS"):
-    """Header minimalista en español (portrait).
-    Header ocupa y=820 (isotopo) hasta y=755 (linea). Contenido debe estar
-    debajo de HEADER_BOTTOM=750.
-    """
-    # Isotopo
-    draw_isotipo_hoja(c, PAGE_W / 2, 822, 16, color=COLOR_VERDE)
-    # Script "Yolitia" centrado, baseline en y=790
-    c.setFont(SCRIPT_REG, 24)
+    """Header minimalista en español."""
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
     c.setFillColor(COLOR_MORADO)
-    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 24)
-    c.drawString((PAGE_W - text_w) / 2, 790, "Yolitia")
-    # Linea fina debajo del header
-    c.setStrokeColor(COLOR_KRAFT)
-    c.setLineWidth(0.3)
-    c.line(MARGIN + 40, 768, PAGE_W - MARGIN - 40, 768)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
 
 def draw_footer(c, page_num):
-    """Footer en y=0..50. Contenido debe estar arriba de FOOTER_TOP=60."""
     c.saveState()
     c.setStrokeColor(COLOR_GRIS_LINEA)
     c.setLineWidth(0.4)
-    c.line(MARGIN, 52, PAGE_W - MARGIN, 52)
+    c.line(MARGIN, 35, PAGE_W - MARGIN, 35)
 
-    c.setFont(SERIF_ITAL, 8)
+    c.setFont(SERIF_ITAL, 9)
     c.setFillColor(COLOR_MARRON)
-    c.drawString(MARGIN, 36, "yolitia.bio")
+    c.drawString(MARGIN, 20, "yolitia.bio")
 
-    c.setFont(SERIF_REG, 8)
+    c.setFont(SERIF_REG, 9)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, 36, f"{page_num:02d}")
+    c.drawCentredString(PAGE_W / 2, 20, f"{page_num:02d}")
 
-    c.setFont(SANS_REG, 6.5)
+    c.setFont(SANS_REG, 7)
     c.setFillColor(COLOR_MARRON)
-    c.drawRightString(PAGE_W - MARGIN, 36, "COLECCIÓN VERANO  ·  2026")
+    c.drawRightString(PAGE_W - MARGIN, 20, "COLECCIÓN VERANO  ·  2026")
 
     c.restoreState()
 
@@ -455,46 +379,39 @@ def build_cover(c):
 
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.55)
 
-    # Logo arriba centrado (cerca del top)
-    draw_isotipo_hoja(c, PAGE_W / 2, 730, 60, color=COLOR_VERDE)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 130, 56, color=COLOR_VERDE)
 
-    # Nombre de marca
-    c.setFont(SCRIPT_REG, 90)
+    c.setFont(SCRIPT_REG, 78)
     c.setFillColor(COLOR_MORADO)
     text = "Yolitia"
-    w = pdfmetrics.stringWidth(text, SCRIPT_REG, 90)
-    c.drawString((PAGE_W - w) / 2, 650, text)
+    w = pdfmetrics.stringWidth(text, SCRIPT_REG, 78)
+    c.drawString((PAGE_W - w) / 2, PAGE_H - 210, text)
 
-    # Subtítulo
-    c.setFont(SANS_REG, 13)
+    c.setFont(SANS_REG, 12)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     sub = "COLECCIÓN  ·  VERANO  ·  2026"
-    w = pdfmetrics.stringWidth(sub, SANS_REG, 13)
-    c.drawString((PAGE_W - w) / 2, 612, sub)
+    w = pdfmetrics.stringWidth(sub, SANS_REG, 12)
+    c.drawString((PAGE_W - w) / 2, PAGE_H - 245, sub)
 
-    # Línea divisoria
-    draw_thin_line(c, PAGE_W / 2 - 70, 590, PAGE_W / 2 + 70, 590,
+    draw_thin_line(c, PAGE_W / 2 - 60, PAGE_H - 265, PAGE_W / 2 + 60, PAGE_H - 265,
                    color=COLOR_NEGRO, width=0.7)
 
-    # "CATÁLOGO"
-    c.setFont(SCRIPT_REG, 26)
+    c.setFont(SCRIPT_REG, 22)
     c.setFillColor(COLOR_NEGRO)
     cat = "CATÁLOGO"
-    w = pdfmetrics.stringWidth(cat, SCRIPT_REG, 26)
-    c.drawString((PAGE_W - w) / 2, 555, cat)
+    w = pdfmetrics.stringWidth(cat, SCRIPT_REG, 22)
+    c.drawString((PAGE_W - w) / 2, PAGE_H - 295, cat)
 
-    # Tagline italic
     c.setFont(SERIF_ITAL, 14)
     c.setFillColor(COLOR_MARRON)
     line1 = "Diseño consciente"
     line2 = "Impreso aquí · Hecho para durar"
     w1 = pdfmetrics.stringWidth(line1, SERIF_ITAL, 14)
     w2 = pdfmetrics.stringWidth(line2, SERIF_ITAL, 14)
-    c.drawString((PAGE_W - w1) / 2, 200, line1)
-    c.drawString((PAGE_W - w2) / 2, 180, line2)
+    c.drawString((PAGE_W - w1) / 2, 130, line1)
+    c.drawString((PAGE_W - w2) / 2, 108, line2)
 
-    # Washtape al pie
-    draw_washi_tape(c, PAGE_W / 2 - 110, 130, 220, 18, angle=-3)
+    draw_washi_tape(c, PAGE_W / 2 - 95, 70, 190, 18, angle=-3)
 
     c.showPage()
 
@@ -508,15 +425,15 @@ def build_index(c, layout):
 
     draw_minimal_header(c)
 
-    # "Contenido" debajo del header
-    c.setFont(SCRIPT_REG, 28)
+    c.setFont(SCRIPT_REG, 30)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, 705, "Contenido")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 165, "Contenido")
 
-    draw_thin_line(c, PAGE_W / 2 - 50, 692, PAGE_W / 2 + 50, 692,
+    draw_thin_line(c, PAGE_W / 2 - 50, PAGE_H - 178, PAGE_W / 2 + 50, PAGE_H - 178,
                    color=COLOR_NEGRO, width=0.6)
 
-    y = 655
+    y = PAGE_H - 215
+
     categorias_vistas = set()
     for pagina in layout["paginas"]:
         if pagina["tipo"] == "separador_categoria":
@@ -546,7 +463,7 @@ def build_index(c, layout):
                 c.setFillColor(COLOR_MARRON)
                 c.drawRightString(PAGE_W - MARGIN, y, num_str)
 
-                y -= 30
+                y -= 32
 
     draw_footer(c, 0)
     c.showPage()
@@ -618,13 +535,10 @@ def draw_product_card_scrapbook(c, x, y, w, h, prod, img_path, rot_photo=0, rot_
         draw_color_palette_strip(c, palette_x, palette_y, palette_w, custom_palette)
 
     # === Etiqueta (debajo del polaroid) ===
-    # Bug fix: en coords reportlab (y crece hacia arriba), el polaroid va de y a y+ph.
-    # La etiqueta debe estar DEBAJO del polaroid: su top debe ser MENOR que polaroid bot.
-    # Formula correcta: label_y = y - 8 - label_h (8pt de gap entre polaroid bot y etiqueta top).
-    label_w = w * 0.95
-    label_h = 80
+    label_w = w * 0.92
+    label_h = 72  # Más compacta porque las descripciones son más cortas
     label_x = x + (w - label_w) / 2
-    label_y = y - 8 - label_h
+    label_y = y - label_h + 14
 
     draw_paper_label(c, label_x, label_y, label_w, label_h,
                      rotation=rot_label, color=COLOR_CREMA, has_tape=False)
@@ -702,8 +616,8 @@ def draw_product_card_scrapbook(c, x, y, w, h, prod, img_path, rot_photo=0, rot_
 # ============================================================================
 
 def build_landmarks_page(c, productos_map, page_num, landmark_ids):
-    """Pagina de landmarks en portrait: 1 o 2 lugares apilados.
-    HEADER_BOTTOM=750, FOOTER_TOP=60. Area util: 690pt.
+    """
+    Página de landmarks con 1 o 2 lugares distribuidos.
     """
     print(f"  Lugares del Mundo (pág {page_num}) — {len(landmark_ids)} lugares")
 
@@ -711,82 +625,54 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.32)
 
-    draw_minimal_header(c)
-
-    # Subtitulo debajo del header
-    # Header termina en y=750 (linea). Dejamos 20pt de gap, subtitulo en y=730.
-    c.setFont(SCRIPT_REG, 22)
+    # Header
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, 715, "Lugares del Mundo")
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
+
+    c.setFont(SCRIPT_REG, 24)
+    c.setFillColor(COLOR_MORADO)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Lugares del Mundo")
 
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 695, "MINIATURAS ARQUITECTONICAS  ·  EDICION LIMITADA")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "MINIATURAS ARQUITECTÓNICAS  ·  EDICIÓN LIMITADA")
 
-    draw_thin_line(c, PAGE_W / 2 - 80, 680, PAGE_W / 2 + 80, 680,
+    draw_thin_line(c, PAGE_W / 2 - 80, PAGE_H - 165, PAGE_W / 2 + 80, PAGE_H - 165,
                    color=COLOR_NEGRO, width=0.5)
 
     overrides = load_overrides()
     landscape_colors = overrides.get("landmarks_terrain_only", {})
 
     n = len(landmark_ids)
-    col_w = 280
-    label_h = 50
-    gap_polaroid_label = 8
-    inter_landmark_gap = 30
-
     if n == 1:
-        # 1 landmark centrado. polaroid + etiqueta = polaroid_h + label_h + gap
-        # Disponible: 680 (linea) - 60 (footer) = 620pt
-        # polaroid_h = 400, label_h = 50, gap = 8 -> 458. Margen 81+81.
-        polaroid_h = 400
-        # polaroid top y = 670 - polaroid_h = 270. Etiqueta bot = 270 - 8 - 50 = 212.
-        # polaroid bot y = 270. Etiqueta top y = 212, bot = 262.
-        # Margen arriba: 670-270 = 400... no, polaroid bot = 270.
-        # polaroid top = 270+400=670, bot = 270. Header termino 750. Gap polaroid-header = 750-670=80.
-        p1_y = 270
-        l1_y = p1_y - gap_polaroid_label - label_h
-        positions = [(PAGE_W / 2 - col_w / 2, p1_y)]
-        label_positions = [l1_y]
+        col_w = 280
+        polaroid_h = 250
+        # Polaroid top = 240+250 = 490 (deja espacio para header y línea)
+        # Header título en y=465 (PAGE_H-130), polaroid top en 490
+        # Etiqueta y = 240-50+6 = 196
+        # Nota al pie y=65
+        positions = [(PAGE_W / 2 - col_w / 2, 240)]
     elif n == 2:
-        # 2 landmarks apilados. Cada uno = polaroid + etiqueta + 2 gaps.
-        # Area util: 680 (linea) - 60 (footer) = 620pt
-        # 2 bloques * (polaroid + label) + 1 gap entre bloques = 620
-        # 2 * (polaroid_h + 50) + 30 = 620
-        # 2*polaroid_h + 130 = 620
-        # polaroid_h = 245
-        polaroid_h = 220
-        # Layout de arriba a abajo (coords reportlab, mayor y = mas arriba):
-        # Polaroid 1 top = 670 (debajo de la linea 680 con margen 10)
-        # Polaroid 1 bot = 670 - 220 = 450
-        p1_y = 670 - polaroid_h  # 450
-        # Etiqueta 1: 8pt debajo de polaroid 1 bot
-        l1_y = p1_y - gap_polaroid_label - label_h  # 450-8-50 = 392
-        # Gap entre etiqueta 1 bot y polaroid 2 top = 30pt
-        # etiqueta 1 bot = 392+50 = 442
-        # polaroid 2 top = 442 - 30 = 412
-        # polaroid 2 bot = 412 - 220 = 192
-        p2_y = (l1_y + label_h) - inter_landmark_gap - polaroid_h  # (392+50)-30-220 = 192
-        l2_y = p2_y - gap_polaroid_label - label_h  # 192-8-50 = 134
+        col_w = 200
+        polaroid_h = 200
+        gap = (PAGE_W - 2 * col_w - 2 * 60) / 3
+        # polaroid top = 240+200 = 440
         positions = [
-            (PAGE_W / 2 - col_w / 2, p1_y),
-            (PAGE_W / 2 - col_w / 2, p2_y),
+            (60 + gap, 240),
+            (60 + 2 * gap + col_w, 240),
         ]
-        label_positions = [l1_y, l2_y]
-    else:
-        polaroid_h = 130
+    else:  # 3 o más
+        col_w = 200
+        polaroid_h = 200
         positions = []
-        label_positions = []
-        gap = 15
-        total_w = n * col_w + (n - 1) * gap
-        start_x = (PAGE_W - total_w) / 2
-        # n lado a lado: cada uno ocupa polaroid + label + gap_polaroid_label
-        # Total vertical por landmark = 130 + 50 + 8 = 188
-        # Disponemos 620pt
-        # Como es horizontal, no se acumula vertical. Usar 1 sola fila.
         for i in range(n):
-            positions.append((start_x + i * (col_w + gap), 500))  # polaroid bot y=500
-            label_positions.append(500 - gap_polaroid_label - label_h)
+            gap = 20
+            total_w = n * col_w + (n - 1) * gap
+            start_x = (PAGE_W - total_w) / 2
+            positions.append((start_x + i * (col_w + gap), 240))
 
     for i, pid in enumerate(landmark_ids):
         if pid not in productos_map:
@@ -797,53 +683,55 @@ def build_landmarks_page(c, productos_map, page_num, landmark_ids):
                                   productos_map)
         custom_color = landscape_colors.get(pid)
 
+        # Polaroid grande
         box = draw_polaroid_frame(c, px, py, col_w, polaroid_h, rotation=0, shadow=False)
         if img_path:
-            # fit_image_in_box usa contain (escala para que QUEPA). Para landmarks con
-            # imagenes pequeñas, queremos que la imagen llene el area.
-            # Cambio a "cover" para que ocupe todo el polaroid.
-            fit_image_in_box_cover(c, img_path, box["x"], box["y"], box["w"], box["h"])
+            fit_image_in_box(c, img_path, box["x"], box["y"], box["w"], box["h"])
 
-        # Etiqueta
-        label_w_local = col_w
+        # Etiqueta con nombre + precio
+        label_h = 60
+        label_w = col_w
         label_x = px
-        label_y = label_positions[i]
+        label_y = py - label_h + 6
 
-        draw_paper_label(c, label_x, label_y, label_w_local, label_h, rotation=0,
+        draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                          color=COLOR_CREMA, has_tape=False)
 
         c.saveState()
-        c.translate(label_x + label_w_local / 2, label_y + label_h / 2)
+        c.translate(label_x + label_w / 2, label_y + label_h / 2)
 
-        c.setFont(SANS_BOLD, 9)
+        # Nombre
+        c.setFont(SANS_BOLD, 9.5)
         c.setFillColor(COLOR_NEGRO)
-        c.drawCentredString(0, 8, f"\u201C{prod['_display_name'].upper()}\u201D")
+        c.drawCentredString(0, 18, f"\u201C{prod['_display_name'].upper()}\u201D")
 
+        # Precio
         if prod.get("_display_price"):
-            c.setFont(SERIF_BOLD, 14)
+            c.setFont(SERIF_BOLD, 17)
             c.setFillColor(COLOR_NEGRO)
-            c.drawCentredString(0, -10, f"${prod['_display_price']:.0f}")
+            c.drawCentredString(0, -5, f"${prod['_display_price']:.0f}")
 
+        # Color personalizado
         if custom_color:
             c.setFillColor(colors.HexColor(custom_color["hex"]))
             c.setStrokeColor(colors.HexColor("#BFB59F"))
             c.setLineWidth(0.3)
-            c.circle(-label_w_local / 2 + 16, 0, 5, stroke=1, fill=1)
-            c.setFont(SANS_REG, 6)
+            c.circle(-label_w / 2 + 16, 0, 6, stroke=1, fill=1)
+            c.setFont(SANS_REG, 6.5)
             c.setFillColor(COLOR_NEGRO_SUAVE)
-            c.drawString(-label_w_local / 2 + 24, -2, custom_color["primary"].upper())
+            c.drawString(-label_w / 2 + 26, -2, custom_color["primary"].upper())
 
         c.restoreState()
 
     # Nota al pie
-    c.setFont(SERIF_ITAL, 8.5)
+    c.setFont(SERIF_ITAL, 9)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, 75,
+    c.drawCentredString(PAGE_W / 2, 65,
                         "Cada lugar se imprime en su propio color de terreno especial")
-    c.setFont(SANS_REG, 7)
+    c.setFont(SANS_REG, 7.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 60,
-                        "ACABADO MATE QUE RESALTA LOS DETALLES ARQUITECTONICOS")
+    c.drawCentredString(PAGE_W / 2, 50,
+                        "ACABADO MATE QUE RESALTA LOS DETALLES ARQUITECTÓNICOS")
 
     draw_footer(c, page_num)
     c.showPage()
@@ -860,18 +748,21 @@ def build_colors_swatch_palette(c, page_num):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.32)
 
-    draw_minimal_header(c)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
+    c.setFillColor(COLOR_MORADO)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
-    # Subtitulo debajo del header
     c.setFont(SCRIPT_REG, 24)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, 715, "Colores Disponibles")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Colores Disponibles")
 
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 695, "TODOS NUESTROS MODELOS ESTAN DISPONIBLES EN LOS SIGUIENTES ACABADOS")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "TODOS NUESTROS MODELOS ESTÁN DISPONIBLES EN LOS SIGUIENTES ACABADOS")
 
-    draw_thin_line(c, PAGE_W / 2 - 80, 680, PAGE_W / 2 + 80, 680,
+    draw_thin_line(c, PAGE_W / 2 - 80, PAGE_H - 165, PAGE_W / 2 + 80, PAGE_H - 165,
                    color=COLOR_NEGRO, width=0.5)
 
     colores = [
@@ -883,22 +774,15 @@ def build_colors_swatch_palette(c, page_num):
         ("Gris",              "#9E9E9E"),
     ]
 
-    # 2 filas x 3 columnas
-    col_w = 150
-    row_h = 130
-    gap_x = 25
-    gap_y = 25
-    cols = 3
-    rows = 2
-    total_w = cols * col_w + (cols - 1) * gap_x
-    start_x = (PAGE_W - total_w) / 2
-    start_y = 440
+    col_w = 100
+    row_h = 110
+    gap_x = 20
+    start_x = (PAGE_W - 6 * col_w - 5 * gap_x) / 2
+    start_y = 200
 
     for i, (nombre, hex_c) in enumerate(colores):
-        col = i % cols
-        row = i // cols
-        x = start_x + col * (col_w + gap_x)
-        y = start_y - row * (row_h + gap_y)
+        x = start_x + i * (col_w + gap_x)
+        y = start_y
 
         draw_paper_label(c, x, y, col_w, row_h, rotation=0,
                          color=COLOR_CREMA, has_tape=False)
@@ -908,24 +792,24 @@ def build_colors_swatch_palette(c, page_num):
         c.setFillColor(colors.HexColor(hex_c))
         c.setStrokeColor(colors.HexColor("#BFB59F"))
         c.setLineWidth(0.4)
-        c.circle(x + col_w / 2, y + row_h - 45, 28, stroke=1, fill=1)
+        c.circle(x + col_w / 2, y + row_h - 35, 24, stroke=1, fill=1)
 
-        c.setFont(SANS_BOLD, 9.5)
+        c.setFont(SANS_BOLD, 8.5)
         c.setFillColor(COLOR_NEGRO)
-        c.drawCentredString(x + col_w / 2, y + 38, nombre.upper())
+        c.drawCentredString(x + col_w / 2, y + 30, nombre.upper())
 
-        c.setFont(SERIF_REG, 7.5)
+        c.setFont(SERIF_REG, 7)
         c.setFillColor(COLOR_MARRON)
-        c.drawCentredString(x + col_w / 2, y + 22, hex_c)
+        c.drawCentredString(x + col_w / 2, y + 15, hex_c)
 
         c.restoreState()
 
-    c.setFont(SERIF_ITAL, 10)
+    c.setFont(SERIF_ITAL, 9.5)
     c.setFillColor(COLOR_MARRON)
     c.drawCentredString(PAGE_W / 2, 130, "Acabado mate en todos los colores")
-    c.setFont(SANS_REG, 8.5)
+    c.setFont(SANS_REG, 8)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 110, "IMPRESION 3D EN PLA BIODEGRADABLE")
+    c.drawCentredString(PAGE_W / 2, 110, "IMPRESIÓN 3D EN PLA BIODEGRADABLE")
 
     draw_footer(c, page_num)
     c.showPage()
@@ -936,51 +820,49 @@ def build_colors_swatch_palette(c, page_num):
 # ============================================================================
 
 def build_cover_collection_page(c, categoria, page_num):
-    """Separador de categoria. La etiqueta va debajo del header."""
     c.setFillColor(COLOR_MARFIL)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45)
 
-    draw_minimal_header(c)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
+    c.setFillColor(COLOR_MORADO)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
-    # Etiqueta principal centrada. Area util HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690
-    # label_h = 480. Top y = 720 (debajo header con margen 30). Bot y = 720-480 = 240.
-    # 240 > FOOTER_TOP(60)+margen(90) = 150. OK.
-    label_w = 460
-    label_h = 480
+    cy = PAGE_H / 2 + 30
+
+    label_w = 420
+    label_h = 280
     label_x = (PAGE_W - label_w) / 2
-    label_y = 720 - label_h  # 240 (etiqueta top, va de 240 a 720)
+    label_y = cy - label_h / 2
 
     draw_paper_label(c, label_x, label_y, label_w, label_h,
                      rotation=0, color=COLOR_CREMA, has_tape=True, tape_pos="top")
 
-    draw_washi_tape(c, label_x + 30, label_y + label_h - 6, 80, 12, angle=-8)
+    draw_washi_tape(c, label_x + 30, label_y - 8, 80, 12, angle=-8)
 
     c.saveState()
-
-    # Texto centrado dentro de la etiqueta
-    cy = label_y + label_h / 2
-
-    c.setFont(SCRIPT_REG, 42)
+    c.setFont(SCRIPT_REG, 38)
     c.setFillColor(COLOR_NEGRO)
     cat_text = categoria
-    if pdfmetrics.stringWidth(cat_text, SCRIPT_REG, 42) > label_w - 40:
-        c.setFont(SCRIPT_REG, 34)
-    c.drawCentredString(PAGE_W / 2, cy + 110, cat_text)
+    if pdfmetrics.stringWidth(cat_text, SCRIPT_REG, 38) > label_w - 40:
+        c.setFont(SCRIPT_REG, 30)
+    c.drawCentredString(PAGE_W / 2, cy + 60, cat_text)
 
-    draw_thin_line(c, PAGE_W / 2 - 50, cy + 75, PAGE_W / 2 + 50, cy + 75,
+    draw_thin_line(c, PAGE_W / 2 - 50, cy + 35, PAGE_W / 2 + 50, cy + 35,
                    color=COLOR_NEGRO, width=0.6)
 
-    c.setFont(SANS_REG, 12)
+    c.setFont(SANS_REG, 11)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    sub = "Coleccion Regenerativa"
-    c.drawCentredString(PAGE_W / 2, cy + 45, sub)
+    sub = "Colección Regenerativa"
+    c.drawCentredString(PAGE_W / 2, cy + 15, sub)
 
-    c.setFont(SERIF_ITAL, 13)
+    c.setFont(SERIF_ITAL, 12)
     c.setFillColor(COLOR_MARRON)
-    c.drawCentredString(PAGE_W / 2, cy - 40, "Diseno consciente · Impreso aqui")
+    c.drawCentredString(PAGE_W / 2, cy - 30, "Diseño consciente · Impreso aquí")
 
-    draw_isotipo_hoja(c, PAGE_W / 2, cy - 130, 26, color=COLOR_VERDE)
+    draw_isotipo_hoja(c, PAGE_W / 2, cy - 90, 22, color=COLOR_VERDE)
 
     c.restoreState()
     draw_footer(c, page_num)
@@ -997,113 +879,87 @@ def build_hero_product_page(c, elem, productos, page_num):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.35)
 
-    draw_minimal_header(c)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
+    c.setFillColor(COLOR_MORADO)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
     img_path = get_image_path(elem, productos)
 
-    # Polaroid centrado. Area util: HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690.
-    # 2 secciones: polaroid arriba + info label abajo.
-    # Polaroid: 280pt de alto, info label: 200pt, gap 30pt, margen 60+60.
-    # Total: 280+200+30+60+60 = 630. OK.
-    pw, ph = 300, 280
-    # Polaroid bot y: HEADER_BOTTOM - 30 (margen) = 720
-    # Polaroid top y: 720 + ph = 1000 (fuera!). Hay que usar polaroid bot menor.
-    # En realidad, ph=280, entonces polaroid top = polaroid bot + 280.
-    # Si polaroid bot = 720, top = 1000. Necesito polaroid bot menor.
-    # 750 (header bottom) - 280 (ph) = 470. Polaroid bot = 470. Top = 470+280=750. Justo.
-    pw, ph = 300, 260
-    py = HEADER_BOTTOM - 30 - ph  # 750-30-260 = 460
-    # Polaroid: bot 460, top 720. Gap con header: 30pt.
-    px = (PAGE_W - pw) / 2
+    pw, ph = 280, 360
+    px = 80
+    py = 150
 
     draw_product_card_scrapbook(c, px, py, pw, ph, prod, img_path,
-                                 rot_photo=0, rot_label=0, max_desc_lines=4)
+                                 rot_photo=0, rot_label=0, max_desc_lines=6)
 
-    # Info label centrado abajo (ancho completo)
-    info_w = PAGE_W - 2 * MARGIN
-    info_h = 200
-    info_x = MARGIN
-    info_y = FOOTER_TOP + 30  # 90
+    # Info label a la derecha
+    info_x = 440
+    info_y = 170
+    info_w = PAGE_W - info_x - 40
+    info_h = 320
 
     draw_paper_label(c, info_x, info_y, info_w, info_h, rotation=0,
                      color=COLOR_CREMA_OSC, has_tape=True, tape_pos="top")
 
     c.saveState()
 
-    # Layout horizontal: 3 columnas
-    col1_x = info_x + 30
-    col2_x = info_x + info_w / 2
-    col3_x = info_x + info_w - 30
-    text_y = info_y + info_h - 35
+    text_x = info_x + 25
+    text_y = info_y + info_h - 30
 
-    # Columna 1: Sostenibilidad
     c.setFont(SANS_BOLD, 10)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(col1_x, text_y, "SOSTENIBILIDAD")
+    c.drawString(text_x, text_y, "SOSTENIBILIDAD")
+
     c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     badges = ["RECICLABLE", "BIODEGRADABLE", "LARGA VIDA"]
+    bx = text_x
     by = text_y - 25
     for b in badges:
         c.setFillColor(COLOR_VERDE)
-        c.circle(col1_x + 3, by, 3, stroke=0, fill=1)
+        c.circle(bx + 3, by, 3, stroke=0, fill=1)
         c.setFillColor(COLOR_NEGRO_SUAVE)
-        c.drawString(col1_x + 11, by - 3, b)
+        c.drawString(bx + 11, by - 3, b)
         by -= 20
 
-    # Columna 2: Detalles
     c.setFont(SANS_BOLD, 10)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(col2_x, text_y, "DETALLES")
+    c.drawString(text_x, by - 15, "DETALLES")
+
     c.setFont(SERIF_ITAL, 9)
     c.setFillColor(COLOR_MARRON)
     sku = elem.get("sku", "")
     cat_es = prod.get('categoria', '')
-    sub_es = prod.get('subcategoria', '')
-    dy = text_y - 25
-    c.drawString(col2_x, dy, f"SKU: {sku}")
-    cat_text = f"Categoria: {cat_es}"
-    if sub_es:
-        cat_text += f" / {sub_es}"
-    # Wrap de la linea de categoria si es muy larga
-    cat_lines = []
-    if pdfmetrics.stringWidth(cat_text, SERIF_ITAL, 9) > 145:
-        # Partir por subcategoria en su propia linea
-        c.drawString(col2_x, dy - 15, f"Categoria: {cat_es}")
-        if sub_es:
-            c.drawString(col2_x, dy - 28, f"Tipo: {sub_es}")
-            c.drawString(col2_x, dy - 41, f"Material: {prod.get('material', 'PLA')}")
-        else:
-            c.drawString(col2_x, dy - 28, f"Material: {prod.get('material', 'PLA')}")
-    else:
-        c.drawString(col2_x, dy - 15, cat_text)
-        c.drawString(col2_x, dy - 30, f"Material: {prod.get('material', 'PLA')}")
+    c.drawString(text_x, by - 35, f"SKU: {sku}")
+    c.drawString(text_x, by - 50, f"Categoría: {cat_es}")
+    c.drawString(text_x, by - 65, f"Material: {prod.get('material', 'PLA')}")
 
-    # Columna 3: Descripcion corta
-    c.setFont(SANS_BOLD, 10)
+    c.setFont(SANS_BOLD, 9)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(col3_x - 110, text_y, "NOTAS")
-    c.setFont(SERIF_ITAL, 8.5)
-    c.setFillColor(COLOR_MARRON)
+    c.drawString(text_x, by - 90, "DESCRIPCIÓN")
+
+    c.setFont(SANS_REG, 7.5)
+    c.setFillColor(COLOR_NEGRO_SUAVE)
     desc = prod["_display_desc"]
-    # Wrap simple
     words = desc.split()
     lines = []
     current_line = ""
-    max_w = 115
+    max_w = info_w - 50
     for word in words:
         test_line = current_line + " " + word if current_line else word
-        if pdfmetrics.stringWidth(test_line, SERIF_ITAL, 8.5) < max_w:
+        if pdfmetrics.stringWidth(test_line, SANS_REG, 7.5) < max_w:
             current_line = test_line
         else:
             lines.append(current_line)
             current_line = word
     if current_line:
         lines.append(current_line)
-    ly = text_y - 25
-    for line in lines[:6]:
-        c.drawString(col3_x - 110, ly, line)
-        ly -= 12
+    ly = by - 110
+    for line in lines[:10]:
+        c.drawString(text_x, ly, line)
+        ly -= 11
 
     c.restoreState()
 
@@ -1112,7 +968,7 @@ def build_hero_product_page(c, elem, productos, page_num):
 
 
 def build_grid_2x2(c, elementos, productos, page_num, custom_palette_map=None):
-    """Portrait: 2 productos lado a lado."""
+    """4 productos en una sola fila con deslizamiento horizontal sutil."""
     print(f"  Grid 2x2: {len(elementos)} productos (pág {page_num})")
 
     c.setFillColor(COLOR_MARFIL)
@@ -1121,22 +977,22 @@ def build_grid_2x2(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 200, 280
-    n = min(len(elementos), 2)
+    pw, ph = 185, 250
+    n = min(len(elementos), 4)
 
-    gap = (PAGE_W - n * pw) / (n + 1)
-    # polaroid bot y = HEADER_BOTTOM - 30 = 720
-    top_y = HEADER_BOTTOM - 30 - ph  # 720-280 = 440
+    total_w = n * pw + (n - 1) * 15
+    start_x = (PAGE_W - total_w) / 2
+    top_y = PAGE_H - 145 - ph
 
-    rot_photos = [-0.4, 0.4]
-    rot_labels = [0.3, -0.3]
-    drifts = [3, -2]
+    rot_photos = [-0.4, 0.4, -0.3, 0.3]
+    rot_labels = [0.3, -0.3, 0.2, -0.2]
+    drifts = [3, -2, 2, -3]
 
     for i, elem in enumerate(elementos[:n]):
         prod = productos.get(elem["producto_id"])
         if not prod:
             continue
-        x = gap + i * (pw + gap)
+        x = start_x + i * (pw + 15)
         rot_p = rot_photos[i]
         rot_l = rot_labels[i]
         drift = drifts[i]
@@ -1154,13 +1010,6 @@ def build_grid_2x2(c, elementos, productos, page_num, custom_palette_map=None):
 
 
 def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
-    """Portrait: 2 productos apilados verticalmente.
-
-    En coords reportlab (y crece hacia arriba):
-    HEADER_BOTTOM=750, FOOTER_TOP=60.
-    Polaroid va de y hasta y+ph. Etiqueta se calcula automaticamente por
-    draw_product_card_scrapbook (8pt debajo del polaroid).
-    """
     print(f"  Grid 1x2: {len(elementos)} productos (pág {page_num})")
 
     c.setFillColor(COLOR_MARFIL)
@@ -1169,91 +1018,13 @@ def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw = 320
-    ph = 220
-
-    # Layout: 2 bloques (polaroid + etiqueta 80pt = 300pt por bloque)
-    # + 1 gap entre bloques = 30pt
-    # Total: 2*300 + 30 = 630pt
-    # Disponible: HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690pt
-    # Margen: 60pt (30 arriba, 30 abajo)
-
-    # Bloque 1 (arriba): polaroid top y = HEADER_BOTTOM - 30 = 720
-    # polaroid bot y = 720 - ph = 500
-    p1_y = HEADER_BOTTOM - 30 - ph  # 500
-    # Bloque 2 (abajo): polaroid top y = FOOTER_TOP + 30 + label_h + 30 = 200
-    # polaroid bot y = 200 - ph = -20 (fuera!)
-    # Ajusto: polaroid 2 bot = FOOTER_TOP + 30 + label_h = 170
-    p2_y = FOOTER_TOP + 30 + 80  # 170
-    # Si p2_y < p1_y - ph - 80 (etiqueta 1) - 30 (gap), se solapan
-    # p1_y - ph = 280 (polaroid 1 top). Necesito polaroid 2 top > 280 + 80 + 30 = 390
-    # p2_y = 170 < 390. MAL.
-    # Reduzco ph.
-    ph = 180
-    p1_y = HEADER_BOTTOM - 30 - ph  # 540
-    p2_y = FOOTER_TOP + 30 + 80  # 170
-    # p1 top = 720, p1 bot = 540, p2 top = 350, p2 bot = 170
-    # Etiqueta 1 top = 540-8-80 = 452, bot = 532. Gap polaroid1_bot-eta1_top = 540-532=8
-    # Etiqueta 2 top = 170-8-80 = 82, bot = 162. Gap polaroid2_bot-eta2_top = 170-162=8
-    # Gap entre etiqueta1 bot (532) y polaroid2 top (350): NO, polaroid2 top = 350, etiqueta1 bot = 532
-    # Solapamiento: 532-350 = 182pt
-
-    # CALCULO CORRECTO:
-    # area_total = HEADER_BOTTOM - FOOTER_TOP - 2*gap_bloque_extremo = 750 - 60 - 60 = 630
-    # 2 bloques de 300pt (polaroid+etiqueta+gap_interno) = 600pt
-    # gap entre bloques = 30pt
-    # Total = 630pt. EXACTO.
-
-    # Coordenadas:
-    # bloque 1 (top): polaroid_top y = HEADER_BOTTOM - margen_top = 720
-    #   polaroid bot y = 720 - 180 = 540
-    #   etiqueta top y = polaroid_bot - gap_polaroid_etiqueta - label_h = 540 - 8 - 80 = 452
-    #   etiqueta bot y = 532
-    # gap entre bloques = 30
-    # bloque 2 (bot): etiqueta1 bot (532) + 30 (gap) = 562
-    #   polaroid top y = etiqueta2 bot + gap_polaroid_etiqueta = ?
-    # Voy de abajo hacia arriba:
-    #   etiqueta 2 bot y = FOOTER_TOP + margen_bot = 90
-    #   etiqueta 2 top y = 90 - 80 = 10
-    #   polaroid 2 bot y = 10 + gap(8) = 18
-    #   polaroid 2 top y = 18 + 180 = 198
-    #   etiqueta 1 bot y = polaroid 2 top - 30 (gap bloques) = 168
-    #   etiqueta 1 top y = 168 - 80 = 88
-    #   polaroid 1 bot y = 88 - 8 (gap_polaroid_etiqueta) = 80
-    #   polaroid 1 top y = 80 + 180 = 260
-    # Demasiado bajo. ph=180 es mucho.
-
-    # Recalculo con ph=160:
-    # bloque 1: polaroid top = 720, bot = 560
-    #   etiqueta top = 560-8-80 = 472, bot = 552
-    # gap = 30
-    # bloque 2: polaroid top = ?, bot = ?
-    #   etiqueta bot = 552 - 30 = 522... espera, etiqueta1 bot esta ARRIBA de polaroid2 top
-    #   El orden visual de arriba a abajo:
-    #     polaroid 1 (top), gap, etiqueta 1, gap, polaroid 2, gap, etiqueta 2
-    #   En coords reportlab (mayor y = mas arriba):
-    #     polaroid_1_top > polaroid_1_bot > ... > polaroid_2_bot
-
-    # Simplifico: layout vertical, 2 bloques
-    # Cada bloque = polaroid (ph) + etiqueta (80) + gap_interno (8) = ph + 88
-    # Gap entre bloques: 20
-    # Total: 2*(ph+88) + 20 = 2*ph + 196
-    # 2*ph + 196 = 690 - 60 (margenes) = 630
-    # 2*ph = 434, ph = 217
-    ph = 200  # un poco menos para tener margen
-
-    # polaroid 1: top y = HEADER_BOTTOM - 30 = 720, bot y = 720-200 = 520
-    p1_y = 720 - 200  # 520
-    # etiqueta 1: top y = 520 - 8 - 80 = 432, bot y = 512
-    # gap 20 entre etiqueta 1 bot (512) y polaroid 2 top
-    # polaroid 2: top y = 512 - 20 = 492, bot y = 492-200 = 292
-    p2_y = 492 - 200  # 292
-    # etiqueta 2: top y = 292 - 8 - 80 = 204, bot y = 284
-    # Verificar: etiqueta 2 bot (284) > FOOTER_TOP (60) + 30 margen = 90. OK.
+    pw, ph = 320, 320
+    polaroid_y = PAGE_H - 165 - ph
+    gap = (PAGE_W - 2 * pw - 2 * MARGIN) / 3
 
     positions = [
-        ((PAGE_W - pw) / 2, p1_y, -0.3, 0.2, 3),
-        ((PAGE_W - pw) / 2, p2_y, 0.3, -0.2, -3),
+        (MARGIN + gap, polaroid_y, -0.3, 0.2, 3),
+        (MARGIN + 2 * gap + pw, polaroid_y, 0.3, -0.2, -3),
     ]
 
     for i, elem in enumerate(elementos[:2]):
@@ -1268,14 +1039,13 @@ def build_grid_1x2(c, elementos, productos, page_num, custom_palette_map=None):
                                      show_color_palette=bool(custom_color),
                                      custom_palette=custom_color,
                                      horizontal_drift=drift,
-                                     max_desc_lines=3)
+                                     max_desc_lines=4)
 
     draw_footer(c, page_num)
     c.showPage()
 
 
 def build_grid_1x3(c, elementos, productos, page_num, custom_palette_map=None):
-    """Portrait: 1 producto centrado por pagina (3 elementos = 3 paginas las crea el caller)."""
     print(f"  Grid 1x3: {len(elementos)} productos (pág {page_num})")
 
     c.setFillColor(COLOR_MARFIL)
@@ -1284,33 +1054,39 @@ def build_grid_1x3(c, elementos, productos, page_num, custom_palette_map=None):
 
     draw_minimal_header(c)
 
-    pw, ph = 340, 360
-    n = min(len(elementos), 1)  # Solo 1 por pagina en portrait
+    pw, ph = 220, 280
+    n = min(len(elementos), 3)
 
-    polaroid_x = (PAGE_W - pw) / 2
-    polaroid_y = HEADER_BOTTOM - 30 - ph  # 750-30-360 = 360
+    total_w = n * pw + (n - 1) * 30
+    start_x = (PAGE_W - total_w) / 2
+    top_y = PAGE_H - 145 - ph
+
+    rot_photos = [-0.4, 0.4, -0.3]
+    rot_labels = [0.3, -0.3, 0.2]
+    drifts = [3, -2, 2]
 
     for i, elem in enumerate(elementos[:n]):
         prod = productos.get(elem["producto_id"])
         if not prod:
             continue
+        x = start_x + i * (pw + 30)
         img_path = get_image_path(elem, productos)
         custom_color = (custom_palette_map or {}).get(prod["id"])
-        draw_product_card_scrapbook(c, polaroid_x, polaroid_y, pw, ph, prod, img_path,
-                                     rot_photo=-0.3, rot_label=0.2,
+        draw_product_card_scrapbook(c, x, top_y, pw, ph, prod, img_path,
+                                     rot_photo=rot_photos[i], rot_label=rot_labels[i],
                                      show_color_palette=bool(custom_color),
                                      custom_palette=custom_color,
-                                     horizontal_drift=2,
-                                     max_desc_lines=5)
+                                     horizontal_drift=drifts[i],
+                                     max_desc_lines=3)
 
-    # Mini strip de colores al pie
-    strip_y = 75
-    strip_x = MARGIN + 50
-    strip_w = PAGE_W - 2 * (MARGIN + 50)
+    # Mini strip de colores (abajo, sin cinta, en línea delgada)
+    strip_y = 70
+    strip_x = MARGIN + 80
+    strip_w = PAGE_W - 2 * (MARGIN + 80)
 
-    c.setFont(SANS_BOLD, 7.5)
+    c.setFont(SANS_BOLD, 7)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(strip_x, strip_y + 14, "COLORES DISPONIBLES:")
+    c.drawString(strip_x, strip_y + 12, "COLORES DISPONIBLES:")
 
     colores = [
         ("BLANCO", "#FFFFFF"),
@@ -1323,16 +1099,16 @@ def build_grid_1x3(c, elementos, productos, page_num, custom_palette_map=None):
 
     sw_size = 9
     sw_gap = 50
-    sw_x_start = strip_x + 145
+    sw_x_start = strip_x + 130
     for i, (nombre, hex_c) in enumerate(colores):
         sx = sw_x_start + i * sw_gap
         c.setFillColor(colors.HexColor(hex_c))
         c.setStrokeColor(colors.HexColor("#BFB59F"))
         c.setLineWidth(0.3)
-        c.circle(sx, strip_y + 14, 6, stroke=1, fill=1)
+        c.circle(sx, strip_y + 12, 6, stroke=1, fill=1)
         c.setFont(SANS_REG, 6)
         c.setFillColor(COLOR_NEGRO_SUAVE)
-        c.drawCentredString(sx, strip_y, nombre)
+        c.drawCentredString(sx, strip_y - 2, nombre)
 
     draw_footer(c, page_num)
     c.showPage()
@@ -1349,60 +1125,62 @@ def build_pla_page(c, page_num):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.32)
 
-    draw_minimal_header(c)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
+    c.setFillColor(COLOR_MORADO)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
-    # Etiqueta principal. Area util HEADER_BOTTOM(750) - FOOTER_TOP(60) = 690
-    # Margenes: 30 arriba, 30 abajo. label_h = 630.
-    label_w = PAGE_W - 2 * MARGIN
-    label_h = 630
-    label_x = MARGIN
-    label_y = HEADER_BOTTOM - 30 - label_h  # 750-30-630 = 90
+    label_w = 600
+    label_h = 380
+    label_x = (PAGE_W - label_w) / 2
+    label_y = 90
 
     draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
 
     c.saveState()
 
-    c.setFont(SCRIPT_REG, 34)
+    c.setFont(SCRIPT_REG, 32)
     c.setFillColor(COLOR_MORADO)
     c.drawCentredString(PAGE_W / 2, label_y + label_h - 55, "Hecho de PLA")
 
     c.setFont(SANS_REG, 11)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, label_y + label_h - 80, "BELLO POR DENTRO Y POR FUERA")
+    c.drawCentredString(PAGE_W / 2, label_y + label_h - 78, "BELLO POR DENTRO Y POR FUERA")
 
-    draw_thin_line(c, PAGE_W / 2 - 50, label_y + label_h - 95, PAGE_W / 2 + 50, label_y + label_h - 95,
+    draw_thin_line(c, PAGE_W / 2 - 50, label_y + label_h - 92, PAGE_W / 2 + 50, label_y + label_h - 92,
                    color=COLOR_NEGRO, width=0.5)
 
-    text_x = label_x + 40
-    text_y = label_y + label_h - 130
+    text_x = label_x + 35
+    text_y = label_y + label_h - 115
 
     paragraphs = [
-        (SANS_REG, COLOR_NEGRO, "El PLA (Acido Polilactico) es un polimero de origen vegetal,"),
-        (SANS_REG, COLOR_NEGRO, "derivado principalmente de almidon de maiz o cana de azucar."),
-        (SANS_REG, COLOR_NEGRO, "A diferencia de los plasticos convencionales, el PLA se obtiene"),
+        (SANS_REG, COLOR_NEGRO, "El PLA (Ácido Poliláctico) es un polímero de origen vegetal,"),
+        (SANS_REG, COLOR_NEGRO, "derivado principalmente de almidón de maíz o caña de azúcar."),
+        (SANS_REG, COLOR_NEGRO, "A diferencia de los plásticos convencionales, el PLA se obtiene"),
         (SANS_REG, COLOR_NEGRO, "de fuentes renovables y es compostable en condiciones"),
         (SANS_REG, COLOR_NEGRO, "industriales."),
         (SANS_REG, None, ""),
-        (SANS_BOLD, COLOR_MORADO, "POR QUE IMPORTA"),
+        (SANS_BOLD, COLOR_MORADO, "POR QUÉ IMPORTA"),
         (SANS_REG, None, ""),
-        (SANS_REG, COLOR_NEGRO, "  -  Reduce la dependencia de petroquimicos"),
-        (SANS_REG, COLOR_NEGRO, "  -  Menor huella de carbono en su produccion"),
-        (SANS_REG, COLOR_NEGRO, "  -  Compostable: no se acumula por siglos"),
-        (SANS_REG, COLOR_NEGRO, "  -  Permite produccion local y bajo demanda"),
-        (SANS_REG, COLOR_NEGRO, "  -  Cero inventario excedente = cero desperdicio"),
+        (SANS_REG, COLOR_NEGRO, "  ·  Reduce la dependencia de petroquímicos"),
+        (SANS_REG, COLOR_NEGRO, "  ·  Menor huella de carbono en su producción"),
+        (SANS_REG, COLOR_NEGRO, "  ·  Compostable: no se acumula por siglos"),
+        (SANS_REG, COLOR_NEGRO, "  ·  Permite producción local y bajo demanda"),
+        (SANS_REG, COLOR_NEGRO, "  ·  Cero inventario excedente = cero desperdicio"),
         (SANS_REG, None, ""),
-        (SANS_BOLD, COLOR_NEGRO, "En Yolitia, cada pieza se imprime en 3D cuando tu la pides."),
-        (SANS_BOLD, COLOR_NEGRO, "No hay bodegas llenas. No hay sobreproduccion."),
+        (SANS_BOLD, COLOR_NEGRO, "En Yolitia, cada pieza se imprime en 3D cuando tú la pides."),
+        (SANS_BOLD, COLOR_NEGRO, "No hay bodegas llenas. No hay sobreproducción."),
     ]
 
     for font, color, text in paragraphs:
         if font:
-            c.setFont(font, 10)
+            c.setFont(font, 9.5)
         if color:
             c.setFillColor(color)
         c.drawString(text_x, text_y, text)
-        text_y -= 16
+        text_y -= 15
 
     c.restoreState()
     draw_footer(c, page_num)
@@ -1416,73 +1194,71 @@ def build_compromiso_page(c, page_num):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.32)
 
-    draw_minimal_header(c)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 50, 28, color=COLOR_VERDE)
+    c.setFont(SCRIPT_REG, 36)
+    c.setFillColor(COLOR_MORADO)
+    text_w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 36)
+    c.drawString((PAGE_W - text_w) / 2, PAGE_H - 85, "Yolitia")
 
     c.setFont(SCRIPT_REG, 30)
     c.setFillColor(COLOR_MORADO)
-    c.drawCentredString(PAGE_W / 2, 715, "Nuestro Compromiso")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 130, "Nuestro Compromiso")
 
     c.setFont(SANS_REG, 11)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawCentredString(PAGE_W / 2, 695, "CONTIGO Y CON EL PLANETA")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 150, "CONTIGO Y CON EL PLANETA")
 
-    draw_thin_line(c, PAGE_W / 2 - 50, 680, PAGE_W / 2 + 50, 680,
+    draw_thin_line(c, PAGE_W / 2 - 50, PAGE_H - 165, PAGE_W / 2 + 50, PAGE_H - 165,
                    color=COLOR_NEGRO, width=0.5)
 
-    # Box 1 - 10% conservacion (arriba)
-    # Area: header_bottom(750) - 30 - titulo(40) = 680
-    # Box 1: top y = 660, bot y = 460 (h=200)
-    box1_x = MARGIN + 10
-    box1_y = 460
-    box1_w = PAGE_W - 2 * (MARGIN + 10)
-    box1_h = 200
+    box1_x = MARGIN + 20
+    box1_y = 230
+    box1_w = PAGE_W - 2 * (MARGIN + 20)
+    box1_h = 110
 
     draw_paper_label(c, box1_x, box1_y, box1_w, box1_h, rotation=-0.3,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
 
     c.saveState()
-    c.translate(box1_x + 25, box1_y + box1_h - 40)
-    c.setFont(SCRIPT_REG, 30)
+    c.translate(box1_x + 20, box1_y + box1_h - 25)
+    c.setFont(SCRIPT_REG, 22)
     c.setFillColor(COLOR_VERDE)
     c.drawString(0, 0, "10%")
-    c.setFont(SANS_BOLD, 13)
+    c.setFont(SANS_BOLD, 11)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(110, 8, "PARA LA CONSERVACION")
+    c.drawString(70, 5, "PARA LA CONSERVACIÓN")
 
-    c.setFont(SANS_REG, 10)
+    c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
-    c.drawString(110, -10, "El 10% de nuestras ganancias se destina directamente a proyectos")
-    c.drawString(110, -25, "de conservacion ambiental en Mexico.")
-    c.drawString(110, -50, "Cada compra tuya apoya esa causa.")
+    c.drawString(70, -10, "El 10% de nuestras ganancias se destina directamente a proyectos")
+    c.drawString(70, -22, "de conservación ambiental en México.")
 
     c.restoreState()
 
-    # Box 2 - redes (abajo)
-    # Box 1 bot = 460. Gap 30. Box 2 top = 430. Box 2 bot = 230.
-    box2_x = MARGIN + 20
-    box2_y = 230
-    box2_w = PAGE_W - 2 * (MARGIN + 20)
-    box2_h = 200
+    box2_x = MARGIN + 30
+    box2_y = 90
+    box2_w = PAGE_W - 2 * (MARGIN + 30)
+    box2_h = 110
 
     draw_paper_label(c, box2_x, box2_y, box2_w, box2_h, rotation=0.4,
                      color=COLOR_CREMA_OSC, has_tape=True, tape_pos="top")
 
     c.saveState()
-    c.translate(box2_x + 25, box2_y + box2_h - 40)
-    c.setFont(SCRIPT_REG, 30)
+    c.translate(box2_x + 20, box2_y + box2_h - 25)
+    c.setFont(SCRIPT_REG, 22)
     c.setFillColor(COLOR_VERDE)
     c.drawString(0, 0, "@")
-    c.setFont(SANS_BOLD, 13)
+    c.setFont(SANS_BOLD, 11)
     c.setFillColor(COLOR_MORADO)
-    c.drawString(70, 8, "DIFUNDIMOS EN REDES")
+    c.drawString(70, 5, "DIFUNDIMOS EN REDES")
 
-    c.setFont(SANS_REG, 10)
+    c.setFont(SANS_REG, 8.5)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     c.drawString(70, -10, "Estamos activos en redes sociales compartiendo nuestro proceso y")
-    c.drawString(70, -25, "valores. Siguenos y unete al movimiento:")
-    c.setFont(SERIF_ITAL, 12)
+    c.drawString(70, -22, "valores. Síguenos y únete al movimiento:")
+    c.setFont(SERIF_ITAL, 10)
     c.setFillColor(COLOR_MARRON)
-    c.drawString(70, -55, "@yolitia   ·   www.yolitia.bio")
+    c.drawString(70, -42, "@yolitia   ·   www.yolitia.bio")
 
     c.restoreState()
 
@@ -1497,25 +1273,23 @@ def build_back_cover(c):
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     draw_background_curves(c, color=COLOR_GRIS_LINEA, opacity=0.45)
 
-    # Logo y nombre arriba
-    draw_isotipo_hoja(c, PAGE_W / 2, 720, 50, color=COLOR_VERDE)
+    draw_isotipo_hoja(c, PAGE_W / 2, PAGE_H - 110, 50, color=COLOR_VERDE)
 
-    c.setFont(SCRIPT_REG, 64)
+    c.setFont(SCRIPT_REG, 60)
     c.setFillColor(COLOR_MORADO)
-    w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 64)
-    c.drawString((PAGE_W - w) / 2, 645, "Yolitia")
+    w = pdfmetrics.stringWidth("Yolitia", SCRIPT_REG, 60)
+    c.drawString((PAGE_W - w) / 2, PAGE_H - 175, "Yolitia")
 
-    c.setFont(SANS_REG, 12)
+    c.setFont(SANS_REG, 11)
     c.setFillColor(COLOR_NEGRO_SUAVE)
     sub = "UN PROYECTO CIRCULAR"
-    w = pdfmetrics.stringWidth(sub, SANS_REG, 12)
-    c.drawString((PAGE_W - w) / 2, 615, sub)
+    w = pdfmetrics.stringWidth(sub, SANS_REG, 11)
+    c.drawString((PAGE_W - w) / 2, PAGE_H - 200, sub)
 
-    # Manifesto ocupa casi toda la pagina
-    label_w = PAGE_W - 2 * MARGIN
-    label_h = 480
-    label_x = MARGIN
-    label_y = 500 - label_h  # 20 (etiqueta top), bot=500
+    label_w = 500
+    label_h = 300
+    label_x = (PAGE_W - label_w) / 2
+    label_y = 80
 
     draw_paper_label(c, label_x, label_y, label_w, label_h, rotation=0,
                      color=COLOR_CREMA, has_tape=True, tape_pos="top")
@@ -1523,37 +1297,42 @@ def build_back_cover(c):
     c.saveState()
 
     text_x = label_x + 35
-    text_y = label_y + label_h - 50
+    text_y = label_y + label_h - 45
 
     manifesto = [
         (SANS_REG, COLOR_NEGRO, "Yolitia nace de una pregunta simple:"),
         (SANS_REG, None, ""),
-        (SERIF_ITAL, COLOR_MORADO, "Y si los objetos que usamos cada dia pudieran"),
-        (SERIF_ITAL, COLOR_MORADO, "hacerse con menos y significar mas?"),
+        (SERIF_ITAL, COLOR_MORADO, "¿Y si los objetos que usamos cada día pudieran"),
+        (SERIF_ITAL, COLOR_MORADO, "hacerse con menos y significar más?"),
         (SANS_REG, None, ""),
         (SANS_BOLD, COLOR_VERDE, "NUESTRO MODELO ES DIFERENTE"),
         (SANS_REG, None, ""),
-        (SANS_REG, COLOR_NEGRO, "  -  Producimos bajo pedido, no en masa"),
-        (SANS_REG, COLOR_NEGRO, "  -  Materiales de origen vegetal (PLA)"),
-        (SANS_REG, COLOR_NEGRO, "  -  Disenamos para durar"),
-        (SANS_REG, COLOR_NEGRO, "  -  Cada compra apoya manufactura local"),
+        (SANS_REG, COLOR_NEGRO, "  →  Producimos bajo pedido, no en masa"),
+        (SANS_REG, COLOR_NEGRO, "  →  Materiales de origen vegetal (PLA)"),
+        (SANS_REG, COLOR_NEGRO, "  →  Diseñamos para durar"),
+        (SANS_REG, COLOR_NEGRO, "  →  Cada compra apoya manufactura local"),
         (SANS_REG, None, ""),
-        (SANS_REG, COLOR_NEGRO, "Somos parte del movimiento de economia circular:"),
+        (SANS_REG, COLOR_NEGRO, "Somos parte del movimiento de economía circular:"),
         (SANS_REG, COLOR_NEGRO, "los materiales entran, se usan, se recuperan."),
         (SANS_BOLD, COLOR_MORADO, "Nada se pierde. Todo vuelve."),
     ]
 
     for font, color, text in manifesto:
         if font:
-            c.setFont(font, 11)
+            c.setFont(font, 10)
         if color:
             c.setFillColor(color)
         c.drawString(text_x, text_y, text)
-        text_y -= 17
+        text_y -= 15
 
     c.restoreState()
 
-    draw_footer(c, 0)
+    draw_washi_tape(c, PAGE_W / 2 - 110, 45, 220, 16, angle=-2)
+
+    c.setFont(SERIF_ITAL, 9)
+    c.setFillColor(COLOR_NEGRO)
+    c.drawCentredString(PAGE_W / 2, 52, "Diseño consciente · Impreso aquí")
+
     c.showPage()
 
 
@@ -1599,7 +1378,7 @@ def get_image_path(elem, productos):
 
 def build_catalog():
     print("=" * 70)
-    print("GENERACION CATALOGO YOLITIA v9 - VERTICAL (PORTRAIT) - ESPANOL")
+    print("GENERACIÓN CATÁLOGO YOLITIA Verano2026 v3 — HORIZONTAL · ESPAÑOL")
     print("=" * 70)
 
     register_fonts()
@@ -1609,20 +1388,30 @@ def build_catalog():
     overrides = load_overrides()
     apply_overrides(productos, overrides)
 
-    print(f"\nLayout: {len(layout['paginas'])} paginas")
+    print(f"\nLayout: {len(layout['paginas'])} páginas")
     print(f"Productos: {len(productos)}")
 
-    c = canvas.Canvas(str(OUTPUT_PDF), pagesize=A4)
-    c.setTitle("Catalogo Yolitia 2026 - Coleccion Verano (Vertical)")
+    c = canvas.Canvas(str(OUTPUT_PDF), pagesize=landscape(A4))
+    c.setTitle("Catálogo Yolitia 2026 - Colección Verano")
     c.setAuthor("Yolitia")
-    c.setSubject("Catalogo de productos impresos en 3D en PLA biodegradable")
+    c.setSubject("Catálogo de productos impresos en 3D en PLA biodegradable")
 
     paginas_generadas = 0
     pagina_actual = 0
+    landmarks_inserted = False
 
-    # Landmarks ahora vienen del layout plan como paginas tipo 'landmarks'
-    LANDMARK_IDS = {"YOL-061", "YOL-066", "YOL-067", "YOL-069", "YOL-070",
-                    "YOL-071", "YOL-072", "YOL-073", "YOL-074"}
+    LANDMARK_IDS = ["YOL-061", "YOL-066", "YOL-067", "YOL-069", "YOL-070",
+                    "YOL-071", "YOL-072", "YOL-073", "YOL-074"]
+
+    # Distribución de landmarks: 2 + 2 + 2 + 2 + 1 (cinco páginas)
+    LANDMARK_BATCHES = [
+        ["YOL-061", "YOL-066"],
+        ["YOL-067", "YOL-069"],
+        ["YOL-070", "YOL-071"],
+        ["YOL-072", "YOL-073"],
+        ["YOL-074"],
+    ]
+    batch_idx = 0
 
     for pagina_data in layout["paginas"]:
         tipo = pagina_data["tipo"]
@@ -1638,26 +1427,24 @@ def build_catalog():
 
         elif tipo == "separador_categoria":
             cat = pagina_data.get("categoria", "")
-            page_num = pagina_data.get("pagina_numero") or (pagina_actual + 1)
+            page_num = pagina_data["pagina_numero"]
+
+            if not landmarks_inserted and ("Regalos" in cat or "Coleccionables" in cat):
+                # Insertar todas las páginas de landmarks ANTES del separador
+                for batch in LANDMARK_BATCHES:
+                    build_landmarks_page(c, productos, pagina_actual + 1, batch)
+                    paginas_generadas += 1
+                    pagina_actual += 1
+                landmarks_inserted = True
+
             build_cover_collection_page(c, cat, page_num)
             paginas_generadas += 1
             pagina_actual += 1
-
-        elif tipo == "landmarks":
-            # Paginas de Lugares del Mundo ya incluidas en el layout
-            landmark_ids = [e.get("producto_id") for e in pagina_data.get("elementos", [])
-                            if e.get("producto_id") in LANDMARK_IDS]
-            if landmark_ids:
-                page_num = pagina_data.get("pagina_numero") or (pagina_actual + 1)
-                build_landmarks_page(c, productos, page_num, landmark_ids)
-                paginas_generadas += 1
-                pagina_actual += 1
 
         elif tipo == "productos":
             grid = pagina_data.get("grid", "1x2")
             page_num = pagina_data.get("pagina_numero") or (pagina_actual + 1)
 
-            # Filtrar por seguridad (el layout ya no deberia incluir landmarks aqui)
             elementos_filtrados = [
                 e for e in pagina_data.get("elementos", [])
                 if e.get("producto_id") not in LANDMARK_IDS
@@ -1671,27 +1458,17 @@ def build_catalog():
             if grid == "1x1":
                 elem = elementos_filtrados[0]
                 build_hero_product_page(c, elem, productos, page_num)
-                paginas_generadas += 1
-                pagina_actual += 1
             elif grid == "2x2":
-                # Portrait: 2 productos lado a lado
                 build_grid_2x2(c, elementos_filtrados, productos, page_num, custom_palette)
-                paginas_generadas += 1
-                pagina_actual += 1
             elif grid == "1x2":
                 build_grid_1x2(c, elementos_filtrados, productos, page_num, custom_palette)
-                paginas_generadas += 1
-                pagina_actual += 1
             elif grid == "1x3":
-                # Portrait: cada producto en su propia pagina
-                for i, elem in enumerate(elementos_filtrados):
-                    build_grid_1x3(c, [elem], productos, page_num + i, custom_palette)
-                    paginas_generadas += 1
-                    pagina_actual += 1
+                build_grid_1x3(c, elementos_filtrados, productos, page_num, custom_palette)
             else:
                 build_grid_1x2(c, elementos_filtrados, productos, page_num, custom_palette)
-                paginas_generadas += 1
-                pagina_actual += 1
+
+            paginas_generadas += 1
+            pagina_actual += 1
 
         elif tipo == "material_pla":
             build_pla_page(c, pagina_actual + 1)
