@@ -3,10 +3,33 @@
 # =============================================================================
 
 # Artefactos de catálogo (regenerables con scripts/build_catalog_v*.py)
+#
+# OJO: este repo es PUBLICO.
+# Las fotos de ORIGEN vienen de MakerWorld con licencia "Standard Digital File
+# License", que prohibe distribuir el trabajo del autor: NO se versionan.
+# Las fotos UGC si, porque las generamos nosotros con la API de Alibaba.
 output/
+!output/
+output/*
+!output/ugc/
 
-# Imágenes de productos descargadas
+# Fotos de ORIGEN sin procesar: vienen de MakerWorld con licencia que prohibe
+# distribuirlas. Este repo es publico, asi que quedan fuera SIEMPRE.
+assets/_incoming/
+assets/images/productos_BACKUP/
+
+# Respaldos de la base: se acumulan y no aportan al repo
+data/*.bak-*
+data/*BACKUP*
+
+# Imágenes de productos descargadas.
+# Se versionan SOLO las UGC (el producto puesto), que son nuestras.
 assets/images/productos/
+!assets/images/productos/
+assets/images/productos/*
+!assets/images/productos/*/
+assets/images/productos/*/*
+!assets/images/productos/*/*_ugc_*.jpg
 
 # Catálogo PDF (se publica como GitHub Release, no en el repo)
 dist/
